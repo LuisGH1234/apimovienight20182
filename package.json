@@ -1,0 +1,19 @@
+{
+  "name": "movienight",
+  "version": "1.0.0",
+  "description": "trabajo final de moviles",
+  "main": "index.js",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express-myconnection": "^1.0.4",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "mysql": "^2.16.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
