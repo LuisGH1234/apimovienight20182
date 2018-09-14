@@ -106,4 +106,4 @@ controller.updateJSON = (request, response) => {
     });
 };
 
-module.exports = controller;
+module.exports.customerController = controller;

@@ -1,7 +1,9 @@
 -- create database
 CREATE DATABASE movienightdb;
+
 -- use database movienight
 use movienightdb;
+
 -- tables
 -- Table: Event
 CREATE TABLE Event (
@@ -25,10 +27,11 @@ CREATE TABLE Event_Participant (
 
 -- Table: Friend
 CREATE TABLE Friend (
+    IDFriendShip bigint NOT NULL AUTO_INCREMENT,
     IDUser bigint NOT NULL,
     CodeFriend bigint NOT NULL,
     Confirmed bool NOT NULL,
-    CONSTRAINT Friend_pk PRIMARY KEY (IDUser)
+    CONSTRAINT Friend_pk PRIMARY KEY (IDFriendShip,IDUser)
 );
 
 -- Table: MediaContent
@@ -42,11 +45,12 @@ CREATE TABLE MediaContent (
 
 -- Table: Notification
 CREATE TABLE Notification (
-    IDDate date NOT NULL,
+    IDNotification bigint NOT NULL AUTO_INCREMENT,
+    Date date NOT NULL,
     IDReciever bigint NOT NULL,
     IDSender bigint NOT NULL COMMENT 'es aquel usuario quien me envio la notificacion',
     Description text NOT NULL,
-    CONSTRAINT Notification_pk PRIMARY KEY (IDDate)
+    CONSTRAINT Notification_pk PRIMARY KEY (IDNotification,IDReciever)
 );
 
 -- Table: PersonalMediaContent
@@ -63,6 +67,7 @@ CREATE TABLE PersonalPlayList (
     IDPersonalPlayList int NOT NULL AUTO_INCREMENT,
     IDUser bigint NOT NULL,
     Name varchar(20) NOT NULL,
+    Description text NOT NULL,
     CONSTRAINT PersonalPlayList_pk PRIMARY KEY (IDPersonalPlayList)
 );
 
@@ -71,6 +76,7 @@ CREATE TABLE PlayList (
     IDPlayList int NOT NULL AUTO_INCREMENT,
     IDEvent bigint NOT NULL,
     Original bool NOT NULL,
+    Description text NOT NULL,
     CONSTRAINT PlayList_pk PRIMARY KEY (IDPlayList)
 );
 
@@ -96,6 +102,7 @@ CREATE TABLE SnackList (
     IDSnackList int NOT NULL AUTO_INCREMENT,
     IDEvent bigint NOT NULL,
     Original bool NOT NULL,
+    Description text NOT NULL,
     CONSTRAINT SnackList_pk PRIMARY KEY (IDSnackList)
 );
 
@@ -130,7 +137,7 @@ ALTER TABLE Friend ADD CONSTRAINT Friend_User FOREIGN KEY Friend_User (IDUser)
 
 -- Reference: ModiaContent_PlayList (table: MediaContent)
 ALTER TABLE MediaContent ADD CONSTRAINT ModiaContent_PlayList FOREIGN KEY ModiaContent_PlayList (IDPlayList)
-    REFERENCES PlayList (IDPlayList);
+    REFERENCES PlayList (IDPlayList) ON DELETE CASCADE;
 
 -- Reference: Notification_User (table: Notification)
 ALTER TABLE Notification ADD CONSTRAINT Notification_User FOREIGN KEY Notification_User (IDReciever)
@@ -138,7 +145,7 @@ ALTER TABLE Notification ADD CONSTRAINT Notification_User FOREIGN KEY Notificati
 
 -- Reference: PersonalMediaContent_PersonalPlayList (table: PersonalMediaContent)
 ALTER TABLE PersonalMediaContent ADD CONSTRAINT PersonalMediaContent_PersonalPlayList FOREIGN KEY PersonalMediaContent_PersonalPlayList (IDPersonalPlayList)
-    REFERENCES PersonalPlayList (IDPersonalPlayList);
+    REFERENCES PersonalPlayList (IDPersonalPlayList) ON DELETE CASCADE;
 
 -- Reference: PersonalPlayList_User (table: PersonalPlayList)
 ALTER TABLE PersonalPlayList ADD CONSTRAINT PersonalPlayList_User FOREIGN KEY PersonalPlayList_User (IDUser)
@@ -146,15 +153,17 @@ ALTER TABLE PersonalPlayList ADD CONSTRAINT PersonalPlayList_User FOREIGN KEY Pe
 
 -- Reference: PlayList_Event (table: PlayList)
 ALTER TABLE PlayList ADD CONSTRAINT PlayList_Event FOREIGN KEY PlayList_Event (IDEvent)
-    REFERENCES Event (IDEvent);
+    REFERENCES Event (IDEvent) ON DELETE CASCADE;
 
 -- Reference: SnackList_Event (table: SnackList)
 ALTER TABLE SnackList ADD CONSTRAINT SnackList_Event FOREIGN KEY SnackList_Event (IDEvent)
-    REFERENCES Event (IDEvent);
+    REFERENCES Event (IDEvent) ON DELETE CASCADE;
 
 -- Reference: Snack_SnackList (table: Snack)
 ALTER TABLE Snack ADD CONSTRAINT Snack_SnackList FOREIGN KEY Snack_SnackList (IDSnackList)
-    REFERENCES SnackList (IDSnackList);
+    REFERENCES SnackList (IDSnackList) ON DELETE CASCADE;
 
 -- End of file.
+
+
 

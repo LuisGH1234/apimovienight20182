@@ -1,0 +1,454 @@
+{
+	"info": {
+		"_postman_id": "d9b15c6c-f057-406e-aff0-806be7ad30ae",
+		"name": "MovieNight API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "Personal Playlist Requests",
+					"item": [
+						{
+							"name": "List personal playlist by user",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/listpersonalplaylist?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"listpersonalplaylist"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "User ID"
+										}
+									]
+								},
+								"description": "With this request each user can view his own playlist."
+							},
+							"response": []
+						},
+						{
+							"name": "Add new personal playlist",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/addpersonalplaylist?IDUser=1&Name=Test: Playlist 1&Description=Some Description (Type: text)",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"addpersonalplaylist"
+									],
+									"query": [
+										{
+											"key": "IDUser",
+											"value": "1",
+											"description": "User ID"
+										},
+										{
+											"key": "Name",
+											"value": "Test: Playlist 1",
+											"description": "Playlist Name"
+										},
+										{
+											"key": "Description",
+											"value": "Some Description (Type: text)",
+											"description": "Description written by User"
+										}
+									]
+								},
+								"description": "With this Request a new personal playlist is added for the user of the session."
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a personal playlist",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/deletepersonalplaylist?id=2",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"deletepersonalplaylist"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Personal playlist ID"
+										}
+									]
+								},
+								"description": "With this request user can remove any own playlist of his Videoteca."
+							},
+							"response": []
+						}
+					],
+					"description": "HTTP verbs for personal playlist",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Personal Media Content Requests",
+					"item": [
+						{
+							"name": "List personal media contents",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/listpersonalmediacontent?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"listpersonalmediacontent"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Playlist ID"
+										}
+									]
+								},
+								"description": "With this request user can view all playlist media contents"
+							},
+							"response": []
+						},
+						{
+							"name": "Add new personal media content",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/addpersonalmediacontent?Title=avengers infinity war&Year=2018&IDPersonalPlayList=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"addpersonalmediacontent"
+									],
+									"query": [
+										{
+											"key": "Title",
+											"value": "avengers infinity war",
+											"description": "Media name"
+										},
+										{
+											"key": "Year",
+											"value": "2018",
+											"description": "Media release year"
+										},
+										{
+											"key": "IDPersonalPlayList",
+											"value": "1",
+											"description": "Personal playlist ID"
+										}
+									]
+								},
+								"description": "With this request user can save a new media content in any selected own playlist"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete a personal media content",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/playlist/deletepersonalmediacontent?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"playlist",
+										"deletepersonalmediacontent"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Personal medi content ID"
+										}
+									]
+								},
+								"description": "With this request user can delete an item into playlist"
+							},
+							"response": []
+						}
+					],
+					"description": "HTTP verbs for personal media contents",
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "Playlist Controller"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Friend",
+					"item": [
+						{
+							"name": "List friends",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/listfriend?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"listfriend"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "My user ID"
+										}
+									]
+								},
+								"description": "With this request user can see his friends list"
+							},
+							"response": []
+						},
+						{
+							"name": "Add new friend",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/addfriend?IDUser=1&CodeFriend=111111113&Confirmed=false",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"addfriend"
+									],
+									"query": [
+										{
+											"key": "IDUser",
+											"value": "1",
+											"description": "My user ID"
+										},
+										{
+											"key": "CodeFriend",
+											"value": "111111113",
+											"description": "Code user as second ID"
+										},
+										{
+											"key": "Confirmed",
+											"value": "false",
+											"description": "Its default value is false until the other user accepts the friend request"
+										}
+									]
+								},
+								"description": "With this request user can send friend requests"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Friend",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/deletefriend?id=2",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"deletefriend"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "2",
+											"description": "Friendship ID"
+										}
+									]
+								},
+								"description": "With this request user can delete a friend"
+							},
+							"response": []
+						}
+					],
+					"description": "HTTP verbs so the user can update or list friends",
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Notification",
+					"item": [
+						{
+							"name": "List notifications",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/listnotification?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"listnotification"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "My user ID"
+										}
+									]
+								},
+								"description": "With this request user can see all his notifications"
+							},
+							"response": []
+						},
+						{
+							"name": "Add notification",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/addnotification?Date=2018-14-09&IDReciever=1&IDSender=2&Description=Some Description 1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"addnotification"
+									],
+									"query": [
+										{
+											"key": "Date",
+											"value": "2018-14-09",
+											"description": "Date of the moment"
+										},
+										{
+											"key": "IDReciever",
+											"value": "1",
+											"description": "My user ID"
+										},
+										{
+											"key": "IDSender",
+											"value": "2",
+											"description": "User sender ID"
+										},
+										{
+											"key": "Description",
+											"value": "Some Description 1",
+											"description": "Description event or friend request"
+										}
+									]
+								},
+								"description": "With this request every time the user interacts with some functionalities, those involved are notificated"
+							},
+							"response": []
+						},
+						{
+							"name": "Delete notification",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "https://movienight2-luis1234.c9users.io/user/deletenotification?id=1",
+									"protocol": "https",
+									"host": [
+										"movienight2-luis1234",
+										"c9users",
+										"io"
+									],
+									"path": [
+										"user",
+										"deletenotification"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Notification ID"
+										}
+									]
+								},
+								"description": "With this request user can delete a notification"
+							},
+							"response": []
+						}
+					],
+					"description": "HTTP verbs so the user can update or list notifications",
+					"_postman_isSubFolder": true
+				}
+			],
+			"description": "User Controller"
+		}
+	]
+}
