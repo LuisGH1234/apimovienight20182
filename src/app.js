@@ -1,37 +1,27 @@
 const express = require('express');
-const path = require('path');
-const morgan = require('morgan');
-const mysql = require('mysql');
-const myConnection = require('express-myconnection');
-
 const app = express();
 
-// importando rutas
-const playlistRoute = require('./routes/playlistRoute');
-const userRoute = require('./routes/userRoute');
+// Importando rutas
+const mymediaRoute = require('./routes/user/play/personal_media_content_route');
+const myplaylistRoute = require('./routes/user/play/personal_playlist_route');
+const userRoute = require('./routes/user/user_route');
+const friendRoute = require('./routes/user/social/friend_route');
+const notificationRoute = require('./routes/user/social/notification_route');
 
-// settings
+// Settings
 app.set('port', process.env.PORT || 3000);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
-app.use(morgan('dev'));
-app.use(myConnection(mysql,{
-    host: process.env.IP,
-    user:'luis1234',
-    password:'',
-    port:3306,
-    database:'movienightdb'
-}, 'single'));
-app.use(express.urlencoded({extended: false}));
+//Middleware
+app.use(express.json());/*si estamos recibiendo un json lo convierte y sera accesible en las rutas*/
 
-// routes
-app.use('/playlist', playlistRoute);
+// Routes
+app.use('/mymedia',mymediaRoute);
+app.use('/myplaylist', myplaylistRoute);
 app.use('/user', userRoute);
+app.use('/friend', friendRoute);
+app.use('/notification', notificationRoute);
 
-//static files
-app.use(express.static(path.join(__dirname, 'public')));
-
+// Report
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get('port')}`);
 });
