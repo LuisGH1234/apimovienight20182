@@ -18,7 +18,7 @@ exports.getResponsabilitiesByEvent = (request, response) => {
 
 exports.getResponsabilitiesByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT u.id 'userID', pe.id 'participantsEventsID', r.id 'responsabilityID'
+    let sql = `SELECT u.firstname 'name', r.product_name 'product_name', r.description 'description'
                 FROM users u INNER JOIN participant_events pe ON u.id = pe.user_id
 				INNER JOIN responsabilities r ON pe.id = r.participant_event_id
                 WHERE u.id = ?`;

@@ -8,6 +8,9 @@ const userRoute = require('./routes/user/user_route');
 const friendRoute = require('./routes/user/social/friend_route');
 const notificationRoute = require('./routes/user/social/notification_route');
 
+const eventRouter = require('./routes/event/event_router');
+const rolRouter = require('./routes/event/rol_router');
+
 // Settings
 app.set('port', process.env.PORT || 3000);
 
@@ -20,6 +23,9 @@ app.use('/myplaylist', myplaylistRoute);
 app.use('/user', userRoute);
 app.use('/friend', friendRoute);
 app.use('/notification', notificationRoute);
+
+app.use('/event', eventRouter);
+app.use('/rol', rolRouter);
 
 // Report
 app.listen(app.get('port'), () => {

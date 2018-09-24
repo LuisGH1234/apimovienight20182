@@ -15,7 +15,7 @@ exports.getSnacksBySnacklist = (request, response) => {
 
 exports.deleteSnack = (request, response) => {
     const { id } = request.params;
-    let sql = 'DELETE FROM snacks WHERE id = ?';
+    let sql = 'delete from snacks where id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
