@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const myConfig = require('./databaseConfig');
 
 const mysqlConnection = mysql.createConnection({
-    host: process.env.IP,
+    host: myConfig.host_name/*process.env.IP*/,
     user: myConfig.user,
     password: myConfig.password,
     database: myConfig.databaseName,
