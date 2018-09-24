@@ -29,6 +29,7 @@ CREATE TABLE media_contents (
     playlist_id int NOT NULL,
     title varchar(20) NOT NULL,
     year varchar(15) NOT NULL,
+    image_url text NULL,
     CONSTRAINT media_contents_pk PRIMARY KEY (id)
 );
 
@@ -58,6 +59,7 @@ CREATE TABLE personal_media_contents (
     title varchar(20) NOT NULL,
     year varchar(15) NOT NULL,
     personal_playlist_id int NOT NULL,
+    image_url text NULL,
     CONSTRAINT personal_media_contents_pk PRIMARY KEY (id)
 );
 
