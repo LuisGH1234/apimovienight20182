@@ -46,3 +46,16 @@ exports.deletePlaylist = (request, response) => {
         }
     });
 };
+
+exports.updatePlaylist = (request, response) => {
+    const { id } = request.params;
+    let sql = `UPDATE playlists SET ? WHERE id = ?`;
+    mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
+        if(!error){
+            response.json({status: "done"});
+        } else{
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};

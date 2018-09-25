@@ -28,8 +28,8 @@ exports.deleteFriend = (request, response) => {
 exports.addFriend = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
-    let post = { "user_id": user_id,
-                    "friend_id": friend_id } = request.body;
+    let post = request.body;
+    //user_id, friend_id
     post.confirmed = false;
     let sql = `INSERT INTO friendships SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {
@@ -45,8 +45,8 @@ exports.updateFriendConfirmed = (request, response) => {
     const { id } = request.params;
     const { confirmed } = request.body;
     let sql = `UPDATE friendships SET confirmed = ? WHERE id = ?`;
-    mysqlConnection.query(sql, [confirmed], (error, rows, fields) => {
-        if(!error) response.json({status: `Friend Confirmed`});
+    mysqlConnection.query(sql, [confirmed, id], (error, rows, fields) => {
+        if(!error) response.json({status: `done`});
         else {
             console.log(error);
             response.json({status: "error"});

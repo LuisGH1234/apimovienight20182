@@ -25,6 +25,7 @@ router.post('/media_content', medi_contentController.addMediaContent);
 router.get('/playlist/:event_id', playlistController.getPlaylistByEvent);
 router.post('/playlist', playlistController.addPlaylistByEvent);
 router.delete('/playlist/:id', playlistController.deletePlaylist);
+router.put('/playlist/:id', playlistController.updatePlaylist);
 
 router.get('/snack/:snacklist_id', snackController.getSnacksBySnacklist);
 router.post('/snack', snackController.addSnack);
@@ -33,5 +34,6 @@ router.delete('/snack/:id', snackController.deleteSnack);
 router.get('/snacklist/:event_id', snacklistController.getSnacklistByEvent);
 router.post('/snacklist', snacklistController.addSnacklistByEvent);
 router.delete('/snacklist/:id', snacklistController.deleteSnacklist);
+router.put('/snacklist/:id', snacklistController.updateSnacklist);
 
 module.exports = router;

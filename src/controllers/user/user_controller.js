@@ -24,4 +24,20 @@ exports.getUser = (request, response) => {
     });
 };
 
+exports.addUser = (request, response) => {
+    if(!request.body){
+      response.json({status: "invalid JSON"});
+    }
+    //user_code, phone, firstname, lastname, email, password
+    let sql = `INSERT INTO users SET ?`;
+    mysqlConnection.query(sql, request.body, (error, rows, fields) => {
+        if(!error) {
+            response.json({status: "done"});
+        }
+        else {
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};
 //module.exports.userController = userController;

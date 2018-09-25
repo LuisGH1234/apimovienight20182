@@ -27,11 +27,9 @@ exports.deletePersonalPlaylist = (request, response) => {
 exports.addPersonalPlayList = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
-    let post = { "user_id": user_id,
-                    "name": name,
-                    "description": description } = request.body;
+    //user_id, name, description
     let sql = `INSERT INTO personal_playlists SET ?`;
-    mysqlConnection.query(sql, post, (error, rows, fields) => {
+    mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error) response.json({status: "done"});
         else {
             console.log(error);
@@ -44,9 +42,10 @@ exports.updatePersonalPlaylist = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
     const { id } = request.params;
-    const { name, description } = request.body;
-    let sql = `UPDATE friendships SET name = ?, description = ? WHERE id = ?`;
-    mysqlConnection.query(sql, [name,description,id], (error, rows, fields) => {
+    //const { name, description } = request.body;
+    //let sql = `UPDATE friendships SET name = ?, description = ? WHERE id = ?`;
+    let sql = `UPDATE personal_playlists SET ? WHERE id = ?`;
+    mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
         if(!error) response.json({status: `done`});
         else {
             console.log(error);

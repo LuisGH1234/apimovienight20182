@@ -46,3 +46,16 @@ exports.deleteSnacklist = (request, response) => {
         }
     });
 };
+
+exports.updateSnacklist = (request, response) => {
+    const { id } = request.params;
+    let sql = `UPDATE snacklists SET ? WHERE id = ?`;
+    mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
+        if(!error){
+            response.json({status: "done"});
+        } else{
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};

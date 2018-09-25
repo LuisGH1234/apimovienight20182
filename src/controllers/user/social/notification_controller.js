@@ -13,7 +13,7 @@ exports.listNotification = (request, response) => {
 };
 
 exports.deleteNotification = (request, response) => {
-    const { id } = request.body;
+    const { id } = request.params;
     let sql = `DELETE FROM notifications WHERE id = ?`;
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error) response.json({status: "done"});
@@ -27,9 +27,8 @@ exports.deleteNotification = (request, response) => {
 exports.addNotification = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
-    let post = { "reciever_id": reciever_id,
-                    "sender_id": sender_id,
-                    "description": description } = request.body;
+    let post = request.body;
+    //reciever_id, sender_id, description
     post.date = new Date();
     let sql = `INSERT INTO notifications SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {

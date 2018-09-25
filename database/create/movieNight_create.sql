@@ -179,3 +179,7 @@ ALTER TABLE responsabilities ADD CONSTRAINT responsabilities_participant_events 
 
 -- End of file.
 
+ALTER TABLE personal_media_contents ADD image_url text NULL;
+ALTER TABLE media_contents ADD image_url text NULL;
+ALTER TABLE snacklists ADD name varchar(20) default "NAMES";
+ALTER TABLE playlists ADD name varchar(20) default "NAMES";
