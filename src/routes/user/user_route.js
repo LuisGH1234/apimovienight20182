@@ -10,6 +10,7 @@ const notificationController = require('../../controllers/user/social/notificati
 router.get('/getusers', userController.getUsers);
 router.get('/:id', userController.getUser);
 router.post('/', userController.addUser);
+router.post('/getuser', userController.getUser2);
 
 router.get('/own_title/:personal_playlist_id', personalMediaContentController.getPersonalMediaContent);
 router.post('/own_title', personalMediaContentController.addPersonalMediaContent);

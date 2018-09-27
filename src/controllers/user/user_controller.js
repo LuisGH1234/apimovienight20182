@@ -24,6 +24,18 @@ exports.getUser = (request, response) => {
     });
 };
 
+exports.getUser2 = (request, response) => {
+    const { email, password } = request.body;
+    let sql = `SELECT * FROM users WHERE email = ? and password = ?`;
+    mysqlConnection.query(sql, [id], (error, users, fields) =>{
+        if(!error) response.json(users[0]);
+        else {
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};
+
 exports.addUser = (request, response) => {
     if(!request.body){
       response.json({status: "invalid JSON"});
