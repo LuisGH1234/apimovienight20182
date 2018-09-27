@@ -7,7 +7,7 @@ exports.getSnacklistByEvent = (request, response) => {
         if(!error){
             let retu = {};
             retu.status = "ok";
-            retu.snacks = rows;
+            retu.snacklists = rows;
             response.json(retu);
         } else{
             console.log(error);
