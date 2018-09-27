@@ -2,7 +2,7 @@ const mysqlConnection = require('../../config/database');
 
 exports.getEventsByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT u.id 'user_id', pe.id 'participant_events_id', e.id 'event_id' 
+    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date' 
                 FROM users u INNER JOIN participant_events pe ON u.id = pe.user_id
 				INNER JOIN events e ON e.id = pe.event_id 
                 WHERE u.id = ?`;
