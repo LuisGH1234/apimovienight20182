@@ -7,7 +7,21 @@ exports.getEventsByUser = (request, response) => {
 				INNER JOIN events e ON e.id = pe.event_id 
                 WHERE u.id = ?`;
     mysqlConnection.query(sql, [user_id], (error, events, fields) =>{
-        if(!error) response.json(events);
+        if(!error) {
+            let retu = [];
+            for(let i=0;i<events.length;i++){
+                retu.push({
+                    "participant_event_id": events[i].participant_event_id,
+                    "events":{
+                        "id": events[i].event_id,
+                        "name": events[i].name_event,
+                        "location": events[i].location,
+                        "date": events[i].date
+                    }
+                });
+            }
+            response.json(retu);
+        }
         else {
             console.log(error);
             response.json({status: "error"});
