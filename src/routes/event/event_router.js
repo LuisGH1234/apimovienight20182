@@ -13,6 +13,8 @@ router.post('/event', eventController.addEvent);
 router.delete('/event/:id', eventController.deleteEvent);
 router.put('/event/:id', eventController.updateEvent);
 
+router.post('/participant', eventController.addParticipantToEvent);
+
 router.get('/responsability_by_event/:event_id',responsabilityController.getResponsabilitiesByEvent);
 router.get('/responsability_by_user/:user_id', responsabilityController.getResponsabilitiesByUser);
 router.post('/responsability', responsabilityController.addResponsabilityByEvent);

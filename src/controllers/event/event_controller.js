@@ -46,6 +46,28 @@ exports.addEvent = (request, response) => {
     });
 };
 
+exports.addParticipantToEvent = (request, response) => {
+    if (!request.body) {
+        response.json({message: "invalid JSON"});
+        return;
+    }
+    let post = {
+        "event_id": request.body.event_id,
+        "user_id": request.body.user_id,
+        "rol_id": request.body.rol_id,
+        "field": "nada"
+    };
+    let sql = 'INSERT INTO participant_events SET ?';
+    mysqlConnection.query(sql, post, (error, rows, fields) => {
+        if(!error){
+            response.json({status: "done"});
+        } else{
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};
+
 exports.updateEvent = (request, response) => {
     if (!request.body) {
         response.json({message: "invalid JSON"});
@@ -75,3 +97,5 @@ exports.deleteEvent = (request, response) => {
         }
     });
 };
+
+
