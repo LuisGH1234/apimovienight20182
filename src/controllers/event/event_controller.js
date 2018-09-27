@@ -13,12 +13,10 @@ exports.getEventsByUser = (request, response) => {
             retu.events = [];
             for(let i=0;i<events.length;i++){
                 retu.events.push({
-                    "participant_event_id": events[i].participant_event_id,
-                        "id": events[i].event_id,
-                        "name": events[i].name_event,
-                        "location": events[i].location,
-                        "date": events[i].date
-
+                    "id": events[i].event_id,
+                    "name": events[i].name_event,
+                    "location": events[i].location,
+                    "date": events[i].date
                 });
             }
             response.json(retu);
