@@ -10,16 +10,15 @@ exports.getEventsByUser = (request, response) => {
         if(!error) {
             let retu = {};
             retu.status = "ok";
-            retu.evs = [];
+            retu.events = [];
             for(let i=0;i<events.length;i++){
-                retu.evs.push({
+                retu.events.push({
                     "participant_event_id": events[i].participant_event_id,
-                    "events":{
                         "id": events[i].event_id,
                         "name": events[i].name_event,
                         "location": events[i].location,
                         "date": events[i].date
-                    }
+
                 });
             }
             response.json(retu);
