@@ -27,7 +27,7 @@ exports.getUser = (request, response) => {
 exports.getUser2 = (request, response) => {
     const { email, password } = request.body;
     let sql = `SELECT * FROM users WHERE email = ? and password = ?`;
-    mysqlConnection.query(sql, [id], (error, users, fields) =>{
+    mysqlConnection.query(sql, [email,password], (error, users, fields) =>{
         if(!error) response.json(users[0]);
         else {
             console.log(error);
