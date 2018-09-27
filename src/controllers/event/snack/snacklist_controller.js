@@ -5,7 +5,10 @@ exports.getSnacklistByEvent = (request, response) => {
     let sql = `SELECT * FROM snacklists WHERE event_id = ?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
         if(!error){
-            response.json(rows);
+            let retu = {};
+            retu.status = "ok";
+            retu.snacks = rows;
+            response.json(retu);
         } else{
             console.log(error);
             response.json({status: "error"});

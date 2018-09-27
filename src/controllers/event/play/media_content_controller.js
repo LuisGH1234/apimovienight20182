@@ -5,7 +5,10 @@ exports.getMediaContentsByPlaylist = (request, response) => {
     let sql = `SELECT * FROM media_contents WHERE playlist_id = ?`;
     mysqlConnection.query(sql, [playlist_id], (error, rows, fields) => {
         if(!error) {
-            response.json(rows);
+            let retu = {};
+            retu.status = "ok";
+            retu.media_contents = rows;
+            response.json(retu);
         } else {
             console.log(error);
             response.json({status: "error"});
