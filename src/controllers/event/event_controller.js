@@ -8,9 +8,11 @@ exports.getEventsByUser = (request, response) => {
                 WHERE u.id = ?`;
     mysqlConnection.query(sql, [user_id], (error, events, fields) =>{
         if(!error) {
-            let retu = [];
+            let retu = {};
+            retu.status = "ok";
+            retu.evs = [];
             for(let i=0;i<events.length;i++){
-                retu.push({
+                retu.evs.push({
                     "participant_event_id": events[i].participant_event_id,
                     "events":{
                         "id": events[i].event_id,
