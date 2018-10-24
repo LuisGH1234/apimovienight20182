@@ -48,8 +48,8 @@ router.delete('/notifications/:id', auth.isAuth, notificationController.deleteNo
 ////
 
 router.get('/users/:user_id/events', auth.isAuth, eventController.getEventsByUser);
-router.post('/events', auth.isAuth, eventController.addEvent);//query a mejorar
-router.delete('/events/:id, auth.isAuth', eventController.deleteEvent);
+router.post('/events', auth.isAuth, eventController.addEvent);
+router.delete('/events/:id', auth.isAuth, eventController.deleteEvent);
 router.put('/events/:id', auth.isAuth, eventController.updateEvent);
 
 router.post('/participant', auth.isAuth, eventController.addParticipantToEvent);
