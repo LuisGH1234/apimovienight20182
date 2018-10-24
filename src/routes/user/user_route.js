@@ -16,6 +16,10 @@ const playlistController = require('../../controllers/event/play/playlist_contro
 const snackController = require('../../controllers/event/snack/snack_controller');
 const snacklistController = require('../../controllers/event/snack/snacklist_controller');
 
+router.get('/dev', (req, res) => {
+    res.json({ active: 'true' });
+});
+
 router.get('/users', userController.getUsers);
 router.get('/private', auth.isAuth, auth.AccessDone);
 router.get('/users/:id', auth.isAuth, userController.getUser);
