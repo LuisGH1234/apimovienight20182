@@ -81,7 +81,7 @@ exports.updateEvent = (request, response) => {
 
 exports.deleteEvent = (request, response) => {
     const { id } = request.params;
-    let sql = 'DELETE FROM events WHERE id = ?';
+    let sql = 'call deleteEvent (?)';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
