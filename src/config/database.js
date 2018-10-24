@@ -2,10 +2,10 @@ const mysql = require('mysql');
 const myConfig = require('./databaseConfig');
 
 const mysqlConnection = mysql.createConnection({
-    host: myConfig.host_name(),
-    user: myConfig.user(),
-    password: myConfig.password(),
-    database: myConfig.databaseName(),
+    host: myConfig.host_name(1),
+    user: myConfig.user(1),
+    password: myConfig.password(1),
+    database: myConfig.databaseName(1),
     port: myConfig.port
 });
 
