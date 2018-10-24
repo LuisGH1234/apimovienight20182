@@ -52,7 +52,7 @@ router.post('/events', auth.isAuth, eventController.addEvent);
 router.delete('/events/:id', auth.isAuth, eventController.deleteEvent);
 router.put('/events/:id', auth.isAuth, eventController.updateEvent);
 
-router.post('/participant', auth.isAuth, eventController.addParticipantToEvent);
+router.post('/participants', auth.isAuth, eventController.addParticipantToEvent);
 
 router.get('/participant_events/:participant_event_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByEvent);
 router.get('/users/:user_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUser);
