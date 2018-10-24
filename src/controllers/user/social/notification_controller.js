@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.listNotification = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT n.id, n.date, n.sender.id, n.description FROM notifications n WHERE reciever_id = ?`;
+    let sql = `SELECT n.id, n.date, n.sender_id, n.description FROM notifications n WHERE reciever_id = ?`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
         if(!error) {
             let retu = {
