@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getPersonalPlaylist = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT * FROM personal_playlists WHERE user_id = ?`;
+    let sql = `SELECT pp.id, pp.name, pp.description FROM personal_playlists pp WHERE user_id = ?`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
         if(!error) {
             let retu = {
