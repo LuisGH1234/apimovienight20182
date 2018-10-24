@@ -5,7 +5,7 @@ exports.getEventsByUser = (request, response) => {
     let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', rol_id ` +
                 `FROM users u RIGHT JOIN participant_events pe ON u.id = pe.user_id ` +
 			    `RIGHT JOIN events e ON e.id = pe.event_id ` +
-			    `WHERE u.id = 2`;
+			    `WHERE u.id = ?`;
     mysqlConnection.query(sql, [user_id], (error, events, fields) =>{
         if(!error) {
             let retu = {};
