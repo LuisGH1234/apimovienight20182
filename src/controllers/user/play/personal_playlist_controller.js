@@ -4,7 +4,13 @@ exports.getPersonalPlaylist = (request, response) => {
     const { user_id } = request.params;
     let sql = `SELECT * FROM personal_playlists WHERE user_id = ?`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
-        if(!error) response.json(rows);
+        if(!error) {
+            let retu = {
+                status: "ok",
+                personal_playlists: rows
+            };
+            response.json(retu);
+        }
         else {
             console.log(error);
             response.json({status: "error"});
@@ -45,7 +51,7 @@ exports.updatePersonalPlaylist = (request, response) => {
     //const { name, description } = request.body;
     //let sql = `UPDATE friendships SET name = ?, description = ? WHERE id = ?`;
     let sql = `UPDATE personal_playlists SET ? WHERE id = ?`;
-    mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
+    mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error) response.json({status: `done`});
         else {
             console.log(error);

@@ -21,13 +21,9 @@ exports.addSnacklistByEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    let post = {
-        "event_id": event_id,
-        "original": original,
-        "description": description
-    } = request.body;
+    //event_id, original, description
     let sql = 'INSERT INTO snacklists SET ?';
-    mysqlConnection.query(sql, post, (error, rows, fields) => {
+    mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
         } else{
@@ -53,7 +49,7 @@ exports.deleteSnacklist = (request, response) => {
 exports.updateSnacklist = (request, response) => {
     const { id } = request.params;
     let sql = `UPDATE snacklists SET ? WHERE id = ?`;
-    mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
+    mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
         } else{

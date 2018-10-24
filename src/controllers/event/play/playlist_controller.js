@@ -1,6 +1,6 @@
 const mysqlConnection = require('../../../config/database');
 
-exports.getPlaylistByEvent = (request, response) => {
+exports.getPlaylistsByEvent = (request, response) => {
     const { event_id } = request.params;
     let sql = `SELECT * FROM playlists WHERE event_id = ?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
@@ -21,13 +21,9 @@ exports.addPlaylistByEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    let post = {
-        "event_id": event_id,
-        "original": original,
-        "description": description
-    } = request.body;
+    //event_id, original, description
     let sql = 'INSERT INTO playlists SET ?';
-    mysqlConnection.query(sql, post, (error, rows, fields) => {
+    mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
         } else{

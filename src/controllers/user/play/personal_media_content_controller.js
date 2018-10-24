@@ -1,11 +1,17 @@
 const mysqlConnection = require('../../../config/database');
 
-exports.getPersonalMediaContent = (request, response) => {
-    const { personal_playlist_id } = request.params;
-    let sql = `SELECT * FROM personal_media_contents WHERE personal_playlist_id = ?`;
-    mysqlConnection.query(sql, [personal_playlist_id], (error, rows, fields) => {
+exports.getPersonalMediaContents = (request, response) => {
+    const { p_play_id, user_id } = request.params;
+    let sql = `SELECT pmc.id 'id', pmc.title 'title', pmc.year 'year', pmc.image_url 'image_url' ` +
+        `FROM personal_media_contents pmc left join personal_playlists pp on pmc.personal_playlist_id = pp.id ` +
+			`left join users u on pp.user_id = u.id ` +
+            `WHERE pp.id = ? and u.id = ?`;
+    mysqlConnection.query(sql, [p_play_id, user_id], (error, rows, fields) => {
        if(!error){
-           response.json(rows);
+           let retu = {};
+           retu.status = "ok";
+           retu.personal_media_contents = rows;
+           response.json(retu);
        } else {
            console.log(error);
            response.json({status: "error"});

@@ -4,8 +4,14 @@ exports.getFriends = (request, response) => {
     const { user_id } = request.params;
     console.log(`param: ${user_id}`);
     let sql = `SELECT * FROM friendships WHERE user_id = ?`;
-    mysqlConnection.query(sql, [user_id], (error, friends, fields) => {
-        if(!error) response.json(friends);
+    mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
+        if(!error) {
+            let retu = {
+                status: "ok",
+                friends: rows
+            };
+            response.json(retu);
+        }
         else {
             console.log(error);
             response.json({status: "error"});

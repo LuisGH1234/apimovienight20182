@@ -2,23 +2,15 @@ const mysqlConnection = require('../../config/database');
 
 exports.getEventsByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date' 
-                FROM users u INNER JOIN participant_events pe ON u.id = pe.user_id
-				INNER JOIN events e ON e.id = pe.event_id 
-                WHERE u.id = ?`;
+    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', rol_id ` +
+                `FROM users u RIGHT JOIN participant_events pe ON u.id = pe.user_id ` +
+			    `RIGHT JOIN events e ON e.id = pe.event_id ` +
+			    `WHERE u.id = 2`;
     mysqlConnection.query(sql, [user_id], (error, events, fields) =>{
         if(!error) {
             let retu = {};
             retu.status = "ok";
-            retu.events = [];
-            for(let i=0;i<events.length;i++){
-                retu.events.push({
-                    "id": events[i].event_id,
-                    "name": events[i].name_event,
-                    "location": events[i].location,
-                    "date": events[i].date
-                });
-            }
+            retu.events = events;
             response.json(retu);
         }
         else {
@@ -41,7 +33,6 @@ exports.addEvent = (request, response) => {
     let sql = 'INSERT INTO events SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
-            //response.json({status: "done"});
             let { user_id, rol_id } = request.body;
             let sql2 = 'INSERT INTO participant_events(event_id,user_id,rol_id) VALUES(LAST_INSERT_ID(),?,?)';
             mysqlConnection.query(sql2, [user_id,rol_id], (error, rows, fields) => {
@@ -52,7 +43,7 @@ exports.addEvent = (request, response) => {
                     response.json({status: "error"});
                 }
             });
-        } else{
+        } else {
             console.log(error);
             response.json({status: "error"});
         }
@@ -64,12 +55,9 @@ exports.addParticipantToEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    let post = {
-        "event_id": request.body.event_id,
-        "user_id": request.body.user_id,
-        "rol_id": request.body.rol_id,
-        "field": "nada"
-    };
+    //event_id user_id rol_id field
+    let post = request.body;
+    post.field = "empty";
     let sql = 'INSERT INTO participant_events SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
@@ -88,7 +76,8 @@ exports.updateEvent = (request, response) => {
     }
     const { id } = request.params;
     let sql = `UPDATE events SET ? WHERE id = ?`;
-    mysqlConnection.query(sql, [/*name,location,date,id*/request.body,id], (error, rows, fields) => {
+    /*name, location, date, id*/
+    mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
         } else{

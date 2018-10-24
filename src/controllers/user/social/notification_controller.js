@@ -1,10 +1,16 @@
 const mysqlConnection = require('../../../config/database');
 
 exports.listNotification = (request, response) => {
-    const { reciever_id } = request.params;
+    const { user_id } = request.params;
     let sql = `SELECT * FROM notifications WHERE reciever_id = ?`;
-    mysqlConnection.query(sql, [reciever_id], (error, rows, fields) => {
-        if(!error) response.json(rows);
+    mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
+        if(!error) {
+            let retu = {
+                status: "ok",
+                notifications: rows
+            };
+            response.json(retu);
+        }
         else {
             console.log(error);
             response.json({status: "error"});

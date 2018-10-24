@@ -3,6 +3,6 @@ const router = express.Router();
 
 const routerController = require('../../controllers/event/participant_event/rol_controller');
 
-router.get('/get', routerController.getRoles);
+router.get('/', routerController.getRoles);
 
 module.exports = router;

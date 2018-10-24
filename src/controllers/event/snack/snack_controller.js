@@ -34,13 +34,9 @@ exports.addSnack = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    let post = {
-        "snacklist_id": snacklist_id,
-        "name": name,
-        "trademark": trademark
-    } = request.body;
+    //snacklist_id, name, trademark
     let sql = 'INSERT INTO snacks SET ?';
-    mysqlConnection.query(sql, post, (error, rows, fields) => {
+    mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
         } else{

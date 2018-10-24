@@ -8,10 +8,10 @@ const playlistController = require('../../controllers/event/play/playlist_contro
 const snackController = require('../../controllers/event/snack/snack_controller');
 const snacklistController = require('../../controllers/event/snack/snacklist_controller');
 
-router.get('/event/:user_id', eventController.getEventsByUser);
-router.post('/event', eventController.addEvent);
-router.delete('/event/:id', eventController.deleteEvent);
-router.put('/event/:id', eventController.updateEvent);
+router.get('/:user_id', eventController.getEventsByUser);
+router.post('/', eventController.addEvent);
+router.delete('/:id', eventController.deleteEvent);
+router.put('/:id', eventController.updateEvent);
 
 router.post('/participant', eventController.addParticipantToEvent);
 
@@ -33,9 +33,9 @@ router.get('/snack/:snacklist_id', snackController.getSnacksBySnacklist);
 router.post('/snack', snackController.addSnack);
 router.delete('/snack/:id', snackController.deleteSnack);
 
-router.get('/snacklist/:event_id', snacklistController.getSnacklistByEvent);
-router.post('/snacklist', snacklistController.addSnacklistByEvent);
-router.delete('/snacklist/:id', snacklistController.deleteSnacklist);
-router.put('/snacklist/:id', snacklistController.updateSnacklist);
+router.get('/snacklists/:event_id', snacklistController.getSnacklistByEvent);
+router.post('/snacklists', snacklistController.addSnacklistByEvent);
+router.delete('/snacklists/:id', snacklistController.deleteSnacklist);
+router.put('/snacklists/:id', snacklistController.updateSnacklist);
 
 module.exports = router;
