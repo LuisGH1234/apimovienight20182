@@ -14,7 +14,7 @@ app.use(express.json());/*si estamos recibiendo un json lo convierte y sera acce
 // Routes
 app.use('/', userRoute);
 //app.use('/events', eventRouter);
-app.use('/rols', rolRouter);
+app.use('/roles', rolRouter);
 
 // Report
 app.listen(app.get('port'), () => {
