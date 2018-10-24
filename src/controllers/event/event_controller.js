@@ -25,24 +25,16 @@ exports.addEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    let post = {
-        "name": request.body.name,
-        "location": request.body.location,
-        "date": request.body.date
-    };
-    let sql = 'INSERT INTO events SET ?';
+    //request.body => { name, rol_id, user_id }
+    let post = [
+        request.body.name,
+        request.body.rol_id,
+        request.body.user_id
+    ];
+    let sql = 'call insertEvent(?, ?, ?)';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
-            let { user_id, rol_id } = request.body;
-            let sql2 = 'INSERT INTO participant_events(event_id,user_id,rol_id) VALUES(LAST_INSERT_ID(),?,?)';
-            mysqlConnection.query(sql2, [user_id,rol_id], (error, rows, fields) => {
-                if(!error){
-                    response.json({status: "done"});
-                } else{
-                    console.log(error);
-                    response.json({status: "error"});
-                }
-            });
+            response.json({status: "done"});
         } else {
             console.log(error);
             response.json({status: "error"});
