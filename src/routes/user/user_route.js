@@ -23,6 +23,7 @@ router.get('/dev', (req, res) => {
 router.get('/users', userController.getUsers);
 router.get('/private', auth.isAuth, auth.AccessDone);
 router.get('/users/:id', auth.isAuth, userController.getUser);
+router.put('/users', auth.isAuth, userController.updateUser);
 
 router.post('/signup', usersign.signUp);
 router.post('/login', auth.isAuth, usersign.singIn);

@@ -37,7 +37,7 @@ exports.getUser2 = (request, response) => {
 
 exports.addUser = (request, response) => {
     if(!request.body){
-      response.json({status: "invalid JSON"});
+        return response.json({status: "invalid JSON"});
     }
     let sql = `INSERT INTO users SET ?`;
     delete request.body.id;
@@ -51,3 +51,23 @@ exports.addUser = (request, response) => {
         }
     });
 };
+
+exports.updateUser = (request, response => {
+    if(!request.body){
+        return response.json({status: "invalid JSON"});
+    }
+    const { id } = request.params;
+    let sql = `UPDATE users SET ? WHERE id = ?`;
+    delete request.body.id;
+    delete request.body.user_code;
+    delete request.body.email;
+    delete request.body.password;
+    mysqlConnection.query(sql, [request.body, id], (err, rows, fields) => {
+        if(!error){
+            return response.json({status: "done"});
+        } else {
+            console.log(error);
+            return response.json({status: "error"});
+        }
+    });
+});
