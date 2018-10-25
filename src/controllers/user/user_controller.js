@@ -1,4 +1,3 @@
-//const userController = {};
 const mysqlConnection = require('../../config/database');
 
 exports.getUsers = (request, response) => {
@@ -40,8 +39,8 @@ exports.addUser = (request, response) => {
     if(!request.body){
       response.json({status: "invalid JSON"});
     }
-    //user_code, phone, firstname, lastname, email, password
     let sql = `INSERT INTO users SET ?`;
+    delete request.body.id;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error) {
             response.json({status: "done"});
@@ -52,4 +51,3 @@ exports.addUser = (request, response) => {
         }
     });
 };
-//module.exports.userController = userController;

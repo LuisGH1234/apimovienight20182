@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getPlaylistsByEvent = (request, response) => {
     const { event_id } = request.params;
-    let sql = `SELECT p.name, p.original, p.description FROM playlists p WHERE event_id = ?`;
+    let sql = `SELECT p.name, p.original, p.description, p.image_url FROM playlists p WHERE event_id = ?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
        if(!error){
            let retu = {};
@@ -21,8 +21,8 @@ exports.addPlaylistByEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //event_id, original, description
     let sql = 'INSERT INTO playlists SET ?';
+    delete request.body.id;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
@@ -49,6 +49,8 @@ exports.deletePlaylist = (request, response) => {
 exports.updatePlaylist = (request, response) => {
     const { id } = request.params;
     let sql = `UPDATE playlists SET ? WHERE id = ?`;
+    delete request.body.id;
+    delete request.body.event_id;
     mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
