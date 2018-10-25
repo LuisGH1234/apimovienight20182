@@ -25,12 +25,14 @@ exports.addEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
+    if(!request.body.image_url) request.body.image_url = null;
     let post = [
         request.body.name,
         request.body.rol_id,
-        request.body.user_id
+        request.body.user_id,
+        request.body.image_url
     ];
-    let sql = 'call insertEvent(?, ?, ?)';
+    let sql = 'call insertEvent(?, ?, ?, ?)';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});
