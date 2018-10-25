@@ -2,7 +2,7 @@ const mysqlConnection = require('../../config/database');
 
 exports.getEventsByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', rol_id ` +
+    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', pe.rol_id, e.latitude, e.longitude, e.image_url ` +
                 `FROM users u RIGHT JOIN participant_events pe ON u.id = pe.user_id ` +
 			    `RIGHT JOIN events e ON e.id = pe.event_id ` +
 			    `WHERE u.id = ?`;
@@ -25,7 +25,6 @@ exports.addEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //request.body => { name, rol_id, user_id }
     let post = [
         request.body.name,
         request.body.rol_id,
@@ -47,7 +46,6 @@ exports.addParticipantToEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //event_id user_id rol_id field
     let post = request.body;
     delete post.id;
     post.field = "empty";
@@ -69,7 +67,6 @@ exports.updateEvent = (request, response) => {
     }
     const { id } = request.params;
     let sql = `UPDATE events SET ? WHERE id = ?`;
-    /*name, location, date, id*/
     delete request.body.id;
     delete request.body.created_by;
     let twoOrNothing = true;
