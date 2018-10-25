@@ -62,7 +62,7 @@ exports.updateUser = (request, response) => {
     delete request.body.user_code;
     delete request.body.email;
     delete request.body.password;
-    mysqlConnection.query(sql, [request.body, id], (err, rows, fields) => {
+    mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
             return response.json({status: "done"});
         } else {
