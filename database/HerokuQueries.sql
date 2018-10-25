@@ -30,6 +30,22 @@ INSERT INTO `heroku_f1cf93086df67b3`.`friendships`
 VALUES
 (71, 11, true);
 
+INSERT INTO `heroku_f1cf93086df67b3`.`responsabilities`
+(`product_name`,`description`,`participant_event_id`)
+VALUES
+('Product 2', 'Description Product 2', 261);
+
+INSERT INTO `heroku_f1cf93086df67b3`.`playlists`
+(`event_id`,`original`,`description`,`name`)
+VALUES
+(291,false,'Description Playlist 2','Playlist 2');
+
+INSERT INTO `heroku_f1cf93086df67b3`.`media_contents`
+(`playlist_id`,`title`,`year`,`image_url`)
+VALUES
+(61,'Doctor Strange', '2016','https://upload.wikimedia.org/wikipedia/en/c/c7/Doctor_Strange_poster.jpg');
+
+
 select * from roles;
 select * from users;
 select * from personal_playlists;
@@ -38,6 +54,9 @@ select * from notifications;
 select * from friendships;
 select * from events;
 select * from participant_events where event_id = 291;
+select * from responsabilities;
+select * from playlists where event_id=291;
+select * from media_contents;
 
 delete from users where (id) in (43);
 delete from personal_media_contents where id=21;
@@ -46,7 +65,7 @@ delete from participant_events where (id) in (191,211);
 delete from events where (id) in (271);
 delete from participant_events where (event_id) in (271);
 
-ALTER TABLE personal_media_contents MODIFY title VARCHAR(100);
+ALTER TABLE media_contents MODIFY title NVARCHAR(100);
 ALTER TABLE notifications MODIFY date datetime;
 ALTER TABLE events MODIFY location nvarchar(80) null;
 ALTER TABLE events MODIFY date datetime null;
@@ -74,6 +93,10 @@ DELIMITER ;
 
 call insertEvent('ProcedureEvent', 11, 71);
 
-SELECT r.id, r.product_name, r.description
-                FROM responsabilities r 
-                WHERE r.participant_event_id = ?
+SELECT * 
+FROM snacks s left join snacklists sl on s.snacklist_id=sl.id
+WHERE snacklist_id = 1;
+
+select m.id, m.title, m.year, m.image_url
+from media_contents m left join playlists p on m.playlist_id=p.id
+where p.event_id=291 and m.playlist_id=61;

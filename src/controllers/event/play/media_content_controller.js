@@ -1,9 +1,11 @@
 const mysqlConnection = require('../../../config/database');
 
 exports.getMediaContentsByPlaylist = (request, response) => {
-    const { playlist_id } = request.params;
-    let sql = `SELECT * FROM media_contents WHERE playlist_id = ?`;
-    mysqlConnection.query(sql, [playlist_id], (error, rows, fields) => {
+    const { event_id, playlist_id } = request.params;
+    let sql = `select m.id, m.title, m.year, m.image_url ` +
+            `from media_contents m left join playlists p on m.playlist_id=p.id ` +
+            `where p.event_id=? and m.playlist_id=?`;
+    mysqlConnection.query(sql, [event_id, playlist_id], (error, rows, fields) => {
         if(!error) {
             let retu = {};
             retu.status = "ok";
