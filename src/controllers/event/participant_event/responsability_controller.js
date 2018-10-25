@@ -21,7 +21,7 @@ exports.getResponsabilitiesByEvent = (request, response) => {
 
 exports.getResponsabilitiesByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `select r.id, r.product_name, r.description ` +
+    let sql = `select r.id, r.product_name, r.description, pe.event_id ` +
             `from responsabilities r left join participant_events pe on r.participant_event_id=pe.id ` +
             `where pe.user_id=?`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) =>{
