@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getResponsabilitiesByEvent = (request, response) => {
     const { event_id } = request.params;
-    let sql = `select r.id, r.product_name, r.description ` +
+    let sql = `select r.id, r.product_name, r.description, pe.user_id ` +
             `from responsabilities r left join participant_events pe on r.participant_event_id=pe.id ` +
             `where pe.event_id=?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
