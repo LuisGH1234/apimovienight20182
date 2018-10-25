@@ -1,7 +1,7 @@
 const mysqlConnection = require('../../../config/database');
 
 exports.getSnacksBySnacklist = (request, response) => {
-    const { snacklist_id } = request.params;
+    const { event_id, snacklist_id } = request.params;
     let sql = `SELECT * FROM snacks WHERE snacklist_id = ?`;
     mysqlConnection.query(sql, [snacklist_id], (error, rows, fields) => {
         if(!error) {
