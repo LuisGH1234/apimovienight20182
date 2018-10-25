@@ -54,11 +54,11 @@ router.put('/events/:id', auth.isAuth, eventController.updateEvent);
 
 router.post('/participants', auth.isAuth, eventController.addParticipantToEvent);
 
-router.get('/events/:event_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByEvent);
-router.get('/users/:user_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUser);
-router.get('/users/:user_id/events/:event_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUserByEvent);
-router.post('/responsabilities', auth.isAuth, responsabilityController.addResponsabilityByEvent);
-router.delete('/responsabilities/:id', auth.isAuth, responsabilityController.deleteResponsability);
+router.get('/events/:event_id/responsibilities', auth.isAuth, responsabilityController.getResponsabilitiesByEvent);
+router.get('/users/:user_id/responsibilities', auth.isAuth, responsabilityController.getResponsabilitiesByUser);
+router.get('/users/:user_id/events/:event_id/responsibilities', auth.isAuth, responsabilityController.getResponsabilitiesByUserByEvent);
+router.post('/responsibilities', auth.isAuth, responsabilityController.addResponsabilityByEvent);
+router.delete('/responsibilities/:id', auth.isAuth, responsabilityController.deleteResponsability);
 
 router.get('/events/:event_id/playlists/:playlist_id/media_contents', auth.isAuth, medi_contentController.getMediaContentsByPlaylist);
 router.post('/media_contents', auth.isAuth, medi_contentController.addMediaContent);
