@@ -94,9 +94,9 @@ ALTER TABLE playlists ADD image_url text null;
 -- IN es para uso propio del storer rpocedure
 DROP procedure IF exists insertEvent;
 DELIMITER //
-create procedure insertEvent (in name_ varchar(50), in user_rol int(11), in user_id_ bigint(20))
+create procedure insertEvent (in name_ varchar(50), in user_rol int(11), in user_id_ bigint(20), in img text)
 begin
-		insert into events (name, created_by) values (name_, user_id_);
+		insert into events (name, created_by, image_url) values (name_, user_id_, img);
         set @last_id := (select max(id) from events where created_by=user_id_);
         insert into participant_events (event_id, user_id, rol_id) values (@last_id, user_id_, user_rol);
 end//

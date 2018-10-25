@@ -52,7 +52,7 @@ exports.addUser = (request, response) => {
     });
 };
 
-exports.updateUser = (request, response => {
+exports.updateUser = (request, response) => {
     if(!request.body){
         return response.json({status: "invalid JSON"});
     }
