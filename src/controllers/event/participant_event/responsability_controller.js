@@ -5,7 +5,7 @@ exports.getResponsabilitiesByEvent = (request, response) => {
     let sql = `select r.id, r.product_name, r.description ` +
             `from responsabilities r left join participant_events pe on r.participant_event_id=pe.id ` +
             `where pe.event_id=?`;
-    mysqlConnection.query(sql, [participant_event_id], (error, rows, fields) => {
+    mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
         if(!error){
             let retu = {
                 status: "ok",
