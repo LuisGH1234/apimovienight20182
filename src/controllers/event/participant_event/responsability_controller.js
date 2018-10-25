@@ -9,7 +9,7 @@ exports.getResponsabilitiesByEvent = (request, response) => {
         if(!error){
             let retu = {
                 status: "ok",
-                responsabilities: rows
+                responsibilities: rows
             };
             response.json(retu);
         } else{
@@ -28,7 +28,7 @@ exports.getResponsabilitiesByUser = (request, response) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                responsabilities: rows
+                responsibilities: rows
             };
             response.json(retu);
         }
@@ -48,7 +48,7 @@ exports.getResponsabilitiesByUserByEvent = (request, response) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                responsabilities: rows
+                responsibilities: rows
             };
             response.json(retu);
         }
