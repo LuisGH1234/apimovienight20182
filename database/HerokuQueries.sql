@@ -45,6 +45,16 @@ INSERT INTO `heroku_f1cf93086df67b3`.`media_contents`
 VALUES
 (61,'Doctor Strange', '2016','https://upload.wikimedia.org/wikipedia/en/c/c7/Doctor_Strange_poster.jpg');
 
+INSERT INTO `heroku_f1cf93086df67b3`.`snacklists`
+(`event_id`,`original`,`description`,`name`)
+VALUES
+(291,0,'Description for Snacklist 2', 'Snacklist 2');
+
+INSERT INTO `heroku_f1cf93086df67b3`.`snacks`
+(`snacklist_id`,`name`,`trademark`)
+VALUES
+(31,'Product 2','Trademark 2');
+
 
 select * from roles;
 select * from users;
@@ -57,6 +67,8 @@ select * from participant_events where event_id = 291;
 select * from responsabilities;
 select * from playlists where event_id=291;
 select * from media_contents;
+select * from snacklists;
+select * from snacks;
 
 delete from users where (id) in (43);
 delete from personal_media_contents where id=21;
@@ -66,6 +78,7 @@ delete from events where (id) in (271);
 delete from participant_events where (event_id) in (271);
 
 ALTER TABLE media_contents MODIFY title NVARCHAR(100);
+ALTER TABLE snacklists MODIFY name NVARCHAR(50);
 ALTER TABLE notifications MODIFY date datetime;
 ALTER TABLE events MODIFY location nvarchar(80) null;
 ALTER TABLE events MODIFY date datetime null;
@@ -100,3 +113,11 @@ WHERE snacklist_id = 1;
 select m.id, m.title, m.year, m.image_url
 from media_contents m left join playlists p on m.playlist_id=p.id
 where p.event_id=291 and m.playlist_id=61;
+
+select s.id, s.name, s.trademark
+from snacks s left join snacklists sl on s.snacklist_id=sl.id
+where sl.event_id=291 and s.snacklist_id=31;
+
+select r.id, r.product_name, r.description
+from responsabilities r left join participant_events pe on r.participant_event_id=pe.id
+where pe.user_id=71 and pe.event_id=291;

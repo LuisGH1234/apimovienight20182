@@ -55,7 +55,8 @@ router.put('/events/:id', auth.isAuth, eventController.updateEvent);
 router.post('/participants', auth.isAuth, eventController.addParticipantToEvent);
 
 router.get('/events/:event_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByEvent);
-router.get('/users/:user_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUser); // no documentado
+router.get('/users/:user_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUser);
+router.get('/users/:user_id/events/:event_id/responsabilities', auth.isAuth, responsabilityController.getResponsabilitiesByUserByEvent);
 router.post('/responsabilities', auth.isAuth, responsabilityController.addResponsabilityByEvent);
 router.delete('/responsabilities/:id', auth.isAuth, responsabilityController.deleteResponsability);
 

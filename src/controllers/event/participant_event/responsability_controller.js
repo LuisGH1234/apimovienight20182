@@ -21,11 +21,30 @@ exports.getResponsabilitiesByEvent = (request, response) => {
 
 exports.getResponsabilitiesByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT r.id, r.product_name, r.description ` +
-                `FROM users u RIGHT JOIN participant_events pe ON u.id = pe.user_id ` +
-				`RIGHT JOIN responsabilities r ON pe.id = r.participant_event_id ` +
-                `WHERE u.id = ?`;
+    let sql = `select r.id, r.product_name, r.description ` +
+            `from responsabilities r left join participant_events pe on r.participant_event_id=pe.id ` +
+            `where pe.user_id=?`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) =>{
+        if(!error) {
+            let retu = {
+                status: "ok",
+                responsabilities: rows
+            };
+            response.json(retu);
+        }
+        else {
+            console.log(error);
+            response.json({status: "error"});
+        }
+    });
+};
+
+exports.getResponsabilitiesByUserByEvent = (request, response) => {
+    const { user_id, event_id } = request.params;
+    let sql = `select r.id, r.product_name, r.description ` +
+            `from responsabilities r left join participant_events pe on r.participant_event_id=pe.id ` +
+            `where pe.user_id=? and pe.event_id=?`;
+    mysqlConnection.query(sql, [user_id, event_id], (error, rows, fields) =>{
         if(!error) {
             let retu = {
                 status: "ok",
