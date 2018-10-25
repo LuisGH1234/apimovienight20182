@@ -49,6 +49,7 @@ exports.addParticipantToEvent = (request, response) => {
     }
     //event_id user_id rol_id field
     let post = request.body;
+    delete post.id;
     post.field = "empty";
     let sql = 'INSERT INTO participant_events SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
@@ -69,6 +70,15 @@ exports.updateEvent = (request, response) => {
     const { id } = request.params;
     let sql = `UPDATE events SET ? WHERE id = ?`;
     /*name, location, date, id*/
+    delete request.body.id;
+    delete request.body.created_by;
+    let twoOrNothing = true;
+    if(request.body.latitude < -90.000000 || request.body.latitude > 90.000000) twoOrNothing = false;
+    if(request.body.longitude < -180.000000 || request.body.longitude > 180.000000) twoOrNothing = false;
+    if(twoOrNothing == false){
+        delete request.body.latitude;
+        delete request.body.longitude;
+    }
     mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
             response.json({status: "done"});

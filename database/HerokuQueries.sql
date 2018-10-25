@@ -83,6 +83,13 @@ ALTER TABLE notifications MODIFY date datetime;
 ALTER TABLE events MODIFY location nvarchar(80) null;
 ALTER TABLE events MODIFY date datetime null;
 ALTER TABLE events ADD created_by bigint(20) not null;
+-- latitud decimal(8,6) -> -99.999999 | 99.999999
+ALTER TABLE events ADD latitude decimal(8,6) null;
+-- longitud decimal(9,6) -> -999.999999 | 999.999999
+ALTER TABLE events ADD longitude decimal(9,6) null;
+ALTER TABLE events ADD image_url text null;
+ALTER TABLE users ADD image_url text null;
+ALTER TABLE playlists ADD image_url text null;
 
 -- IN es para uso propio del storer rpocedure
 DROP procedure IF exists insertEvent;
@@ -121,3 +128,31 @@ where sl.event_id=291 and s.snacklist_id=31;
 select r.id, r.product_name, r.description
 from responsabilities r left join participant_events pe on r.participant_event_id=pe.id
 where pe.user_id=71 and pe.event_id=291;
+
+drop procedure if exists updateEvent;
+DELIMITER //
+create procedure updateEvent (in _name varchar(50), in _location varchar(80), 
+	in _date datetime, in lat decimal(8,6), in lon decimal(9,6), in img text, in _id bigint(20))
+begin
+    set @twoOrNothing := 1;
+    
+	if  lat < -90.000000 or lat > 90.000000 then
+		set @twoOrNothing = 0;
+	end if;
+    
+    if lon < -180.000000 or lon > 180.000000 then
+		set @twoOrNothing = 0;
+	end if;
+    
+    if @twoOrNothing = 0 then
+		set lat = null;
+        set lon = null;
+        select 'Latitude and/or Longitude out of range';
+	end if;
+    
+    update events set name=_name,location=_location,date=_date,latitude=lat,longitude=lon,image_url=img
+    where id=_id;
+end;//
+DELIMITER ;
+
+call updateEvent()
