@@ -70,4 +70,4 @@ exports.updateUser = (request, response) => {
             return response.json({status: "error"});
         }
     });
-});
+};
