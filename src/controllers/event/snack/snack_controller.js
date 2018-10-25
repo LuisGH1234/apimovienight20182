@@ -33,8 +33,7 @@ exports.deleteSnack = (request, response) => {
 
 exports.addSnack = (request, response) => {
     if (!request.body) {
-        response.json({message: "invalid JSON"});
-        return;
+        return response.json({message: "invalid JSON"});
     }
     //snacklist_id, name, trademark
     let sql = 'INSERT INTO snacks SET ?';
@@ -43,7 +42,7 @@ exports.addSnack = (request, response) => {
             response.json({status: "done"});
         } else{
             console.log(error);
-            response.json({status: "error"});
+            response.json({status: "error", message: error});
         }
     });
 };
