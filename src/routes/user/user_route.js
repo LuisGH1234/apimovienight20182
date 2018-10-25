@@ -59,7 +59,7 @@ router.get('/users/:user_id/responsabilities', auth.isAuth, responsabilityContro
 router.post('/responsabilities', auth.isAuth, responsabilityController.addResponsabilityByEvent);
 router.delete('/responsabilities/:id', auth.isAuth, responsabilityController.deleteResponsability);
 
-router.get('/events/:event_id/playlists/:playlist_id/media_contents', auth.isAuth, medi_contentController.getMediaContentsByPlaylist);//
+router.get('/events/:event_id/playlists/:playlist_id/media_contents', auth.isAuth, medi_contentController.getMediaContentsByPlaylist);
 router.post('/media_contents', auth.isAuth, medi_contentController.addMediaContent);
 router.delete('/media_contents/:id', auth.isAuth, medi_contentController.deleteMediaContent);
 
@@ -68,7 +68,7 @@ router.post('/playlists', auth.isAuth, playlistController.addPlaylistByEvent);
 router.delete('/playlists/:id', auth.isAuth, playlistController.deletePlaylist);
 router.put('/playlists/:id', auth.isAuth, playlistController.updatePlaylist);
 
-router.get('/events/:event_id/snacklists/:snacklist_id/snacks', auth.isAuth, snackController.getSnacksBySnacklist);//
+router.get('/events/:event_id/snacklists/:snacklist_id/snacks', auth.isAuth, snackController.getSnacksBySnacklist);
 router.post('/snacks', auth.isAuth, snackController.addSnack);
 router.delete('/snacks/:id', auth.isAuth, snackController.deleteSnack);
 

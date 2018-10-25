@@ -2,8 +2,10 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getSnacksBySnacklist = (request, response) => {
     const { event_id, snacklist_id } = request.params;
-    let sql = `SELECT * FROM snacks WHERE snacklist_id = ?`;
-    mysqlConnection.query(sql, [snacklist_id], (error, rows, fields) => {
+    let sql = `select s.id, s.name, s.trademark ` +
+            `from snacks s left join snacklists sl on s.snacklist_id=sl.id ` +
+            `where sl.event_id=? and s.snacklist_id=?`;
+    mysqlConnection.query(sql, [event_id, snacklist_id], (error, rows, fields) => {
         if(!error) {
             let retu = {};
             retu.status = "ok";

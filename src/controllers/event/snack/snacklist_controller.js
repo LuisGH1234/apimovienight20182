@@ -21,7 +21,7 @@ exports.addSnacklistByEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //event_id, original, description
+    //event_id, original, description, name
     let sql = 'INSERT INTO snacklists SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){

@@ -36,7 +36,7 @@ exports.addMediaContent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //playlist_id, title, year
+    //playlist_id, title, year, image_url
     let sql = 'INSERT INTO media_contents SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
