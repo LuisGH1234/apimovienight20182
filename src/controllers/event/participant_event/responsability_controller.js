@@ -64,7 +64,6 @@ exports.addResponsabilityByEvent = (request, response) => {
         response.json({message: "invalid JSON"});
         return;
     }
-    //product_name, description, participant_event_id
     let post = request.body;
     let sql = 'INSERT INTO responsabilities SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {

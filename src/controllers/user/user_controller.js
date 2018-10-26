@@ -13,7 +13,7 @@ exports.getUsers = (request, response) => {
 
 exports.getUser = (request, response) => {
     const { id } = request.params;
-    let sql = `SELECT * FROM users WHERE id = ?`;
+    let sql = `SELECT u.user_code, u.phone, u.firstname, u.lastname, u.email, u.image_url FROM users u WHERE id = ?`;
     mysqlConnection.query(sql, [id], (error, users, fields) =>{
         if(!error) response.json(users[0]);
         else {

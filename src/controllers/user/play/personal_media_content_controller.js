@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getPersonalMediaContents = (request, response) => {
     const { p_play_id, user_id } = request.params;
-    let sql = `SELECT pmc.id 'id', pmc.title 'title', pmc.year 'year', pmc.image_url 'image_url' ` +
+    let sql = `SELECT pmc.id 'id', pmc.title 'title', pmc.year 'year', pmc.image_url 'image_url', pmc.imdb_id ` +
         `FROM personal_media_contents pmc left join personal_playlists pp on pmc.personal_playlist_id = pp.id ` +
 			`left join users u on pp.user_id = u.id ` +
             `WHERE pp.id = ? and u.id = ?`;

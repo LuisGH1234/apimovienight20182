@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getSnacklistByEvent = (request, response) => {
     const { event_id } = request.params;
-    let sql = `SELECT * FROM snacklists WHERE event_id = ?`;
+    let sql = `SELECT s.id, s.name, s.original, s.description FROM snacklists s WHERE event_id = ?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
         if(!error){
             let retu = {};

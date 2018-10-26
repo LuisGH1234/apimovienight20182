@@ -20,3 +20,5 @@ app.use('/roles', rolRouter);
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get('port')}`);
 });
+
+//Omdb api key: deb5b9ed

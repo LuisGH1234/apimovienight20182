@@ -2,10 +2,9 @@ const mysqlConnection = require('../../config/database');
 
 exports.getEventsByUser = (request, response) => {
     const { user_id } = request.params;
-    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', pe.rol_id, e.latitude, e.longitude, e.image_url ` +
-                `FROM users u RIGHT JOIN participant_events pe ON u.id = pe.user_id ` +
-			    `RIGHT JOIN events e ON e.id = pe.event_id ` +
-			    `WHERE u.id = ?`;
+    let sql = `SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', pe.rol_id, e.latitude, e.longitude, e.image_url, e.description ` +
+            `FROM participant_events pe right join events e on e.id=pe.event_id ` +
+            `WHERE pe.user_id = ?`;
     mysqlConnection.query(sql, [user_id], (error, events, fields) =>{
         if(!error) {
             let retu = {};
