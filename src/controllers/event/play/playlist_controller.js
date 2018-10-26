@@ -2,7 +2,7 @@ const mysqlConnection = require('../../../config/database');
 
 exports.getPlaylistsByEvent = (request, response) => {
     const { event_id } = request.params;
-    let sql = `SELECT p.name, p.original, p.description, p.image_url FROM playlists p WHERE event_id = ?`;
+    let sql = `SELECT p.id, p.name, p.original, p.description, p.image_url FROM playlists p WHERE event_id = ?`;
     mysqlConnection.query(sql, [event_id], (error, rows, fields) => {
        if(!error){
            let retu = {};
