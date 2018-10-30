@@ -34,7 +34,8 @@ function singIn(req, res) {
                 access: 'true'
                // token: service.createToken(user),
                // user_id: user.id
-            }).set('auth', `${service.createToken(user)} ${user.id}`);
+            });
+            res.set('auth', `${service.createToken(user)} ${user.id}`);
         } else {
             res.status(404).json({ access: 'false' });
         }
