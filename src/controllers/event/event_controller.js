@@ -34,7 +34,7 @@ exports.addEvent = (request, response) => {
     let sql = 'call insertEvent(?, ?, ?, ?)';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else {
             console.log(error);
             response.json({status: "error"});
@@ -53,7 +53,7 @@ exports.addParticipantToEvent = (request, response) => {
     let sql = 'INSERT INTO participant_events SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -79,7 +79,7 @@ exports.updateEvent = (request, response) => {
     }
     mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -92,7 +92,7 @@ exports.deleteEvent = (request, response) => {
     let sql = 'call deleteEvent (?)';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});

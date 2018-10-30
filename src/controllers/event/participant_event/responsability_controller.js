@@ -68,7 +68,7 @@ exports.addResponsabilityByEvent = (request, response) => {
     let sql = 'INSERT INTO responsabilities SET ?';
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -81,7 +81,7 @@ exports.deleteResponsability = (request, response) => {
     let sql = 'DELETE FROM responsabilities WHERE id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});

@@ -23,7 +23,7 @@ exports.deleteMediaContent = (request, response) => {
     let sql = 'DELETE FROM media_contents WHERE id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -40,7 +40,7 @@ exports.addMediaContent = (request, response) => {
     let sql = 'INSERT INTO media_contents SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});

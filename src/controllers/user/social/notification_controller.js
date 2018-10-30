@@ -22,7 +22,7 @@ exports.deleteNotification = (request, response) => {
     const { id } = request.params;
     let sql = `DELETE FROM notifications WHERE id = ?`;
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
-        if(!error) response.json({status: "done"});
+        if(!error) response.json({status: "ok"});
         else {
             console.log(error);
             response.json({status: "error"});
@@ -38,7 +38,7 @@ exports.addNotification = (request, response) => {
     post.date = new Date();
     let sql = `INSERT INTO notifications SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {
-        if(!error) response.json({status: "done"});
+        if(!error) response.json({status: "ok"});
         else {
             console.log(error);
             response.json({status: "error"});

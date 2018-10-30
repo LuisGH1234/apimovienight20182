@@ -25,7 +25,7 @@ exports.addPlaylistByEvent = (request, response) => {
     delete request.body.id;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -38,7 +38,7 @@ exports.deletePlaylist = (request, response) => {
     let sql = 'DELETE FROM playlists WHERE id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -53,7 +53,7 @@ exports.updatePlaylist = (request, response) => {
     delete request.body.event_id;
     mysqlConnection.query(sql, [request.body,id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});

@@ -24,7 +24,7 @@ exports.deletePersonalMediaContent = (request, response) => {
     let sql = `DELETE FROM personal_media_contents WHERE id = ?`;
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else {
             console.log(error);
             response.json({status: "error"});
@@ -38,7 +38,7 @@ exports.addPersonalMediaContent = (request, response) => {
     //title, year, personal_playlist_id, image_url
     let sql = `INSERT INTO personal_media_contents SET ?`;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
-        if(!error) response.json({status: "done"});
+        if(!error) response.json({status: "ok"});
         else {
             console.log(error);
             response.json({status: "error"});

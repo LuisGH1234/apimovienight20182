@@ -25,7 +25,7 @@ exports.addSnacklistByEvent = (request, response) => {
     let sql = 'INSERT INTO snacklists SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -38,7 +38,7 @@ exports.deleteSnacklist = (request, response) => {
     let sql = 'DELETE FROM snacklists WHERE id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -51,7 +51,7 @@ exports.updateSnacklist = (request, response) => {
     let sql = `UPDATE snacklists SET ? WHERE id = ?`;
     mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});

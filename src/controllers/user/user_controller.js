@@ -43,7 +43,7 @@ exports.addUser = (request, response) => {
     delete request.body.id;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error) {
-            response.json({status: "done"});
+            response.json({status: "ok"});
         }
         else {
             console.log(error);
@@ -64,7 +64,7 @@ exports.updateUser = (request, response) => {
     delete request.body.password;
     mysqlConnection.query(sql, [request.body, id], (error, rows, fields) => {
         if(!error){
-            return response.json({status: "done"});
+            return response.json({status: "ok"});
         } else {
             console.log(error);
             return response.json({status: "error"});

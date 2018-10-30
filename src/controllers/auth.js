@@ -26,18 +26,16 @@ function signUp(request, response) {
 }
 
 function singIn(req, res) {
-    User.find(req.email).then(user => {
+    User.find(req.body.email).then(user => {
         if(!user) return res.status(404).json({ message: 'No user found' });
-        if((req.body.email == req.email) && (req.body.password == user.password) && (req.user_id == user.id)) {
-            console.log(req.body.email + " == " + user.email + " && " + req.body.password + " == " + user.password + " && " + req.user_id + " == " + user.id);
+        if(user.password === req.body.password) {
             req.user = user;
             res.status(200).json({
-                access: 'true',
-                token: service.createToken(user),
-                user_id: user.id
-            });
+                access: 'true'
+               // token: service.createToken(user),
+               // user_id: user.id
+            }).set('auth', `${service.createToken(user)} ${user.id}`);
         } else {
-            console.log(req.body.email + " == " + user.email + " && " + req.body.password + " == " + user.password + " && " + req.user_id + " == " + user.id);
             res.status(404).json({ access: 'false' });
         }
     }).catch(error => {

@@ -23,7 +23,7 @@ exports.deleteSnack = (request, response) => {
     let sql = 'delete from snacks where id = ?';
     mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error"});
@@ -39,7 +39,7 @@ exports.addSnack = (request, response) => {
     let sql = 'INSERT INTO snacks SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
-            response.json({status: "done"});
+            response.json({status: "ok"});
         } else{
             console.log(error);
             response.json({status: "error", message: error});

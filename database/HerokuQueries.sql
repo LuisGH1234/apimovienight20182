@@ -82,6 +82,9 @@ ALTER TABLE snacklists MODIFY name NVARCHAR(50);
 ALTER TABLE notifications MODIFY date datetime;
 ALTER TABLE events MODIFY location nvarchar(80) null;
 ALTER TABLE events MODIFY date datetime null;
+ALTER TABLE playlists MODIFY description text null;
+ALTER TABLE snacklists MODIFY description text null;
+ALTER TABLE responsabilities MODIFY description text null;
 ALTER TABLE events ADD created_by bigint(20) not null;
 -- latitud decimal(8,6) -> -99.999999 | 99.999999
 ALTER TABLE events ADD latitude decimal(8,6) null;
@@ -90,6 +93,9 @@ ALTER TABLE events ADD longitude decimal(9,6) null;
 ALTER TABLE events ADD image_url text null;
 ALTER TABLE users ADD image_url text null;
 ALTER TABLE playlists ADD image_url text null;
+ALTER TABLE events ADD description text null;
+ALTER TABLE media_contents ADD imdb_id nvarchar(30) null;
+ALTER TABLE personal_media_contents ADD imdb_id nvarchar(30) null;
 
 -- IN es para uso propio del storer rpocedure
 DROP procedure IF exists insertEvent;
@@ -155,4 +161,6 @@ begin
 end;//
 DELIMITER ;
 
-call updateEvent()
+SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', pe.rol_id, e.latitude, e.longitude, e.image_url, e.description 
+                FROM participant_events pe right join events e on e.id=pe.event_id
+			    WHERE pe.user_id = 71
