@@ -29,13 +29,14 @@ function singIn(req, res) {
     User.find(req.body.email).then(user => {
         if(!user) return res.status(404).json({ message: 'No user found' });
         if(user.password === req.body.password) {
-            req.user = user;
+            //req.user = user;
+            res.addTrailers('token', `${service.createToken(user)} ${user.id}`);
             res.status(200).json({
                 access: 'true'
                // token: service.createToken(user),
                // user_id: user.id
             });
-            res.addTrailers('token', `${service.createToken(user)} ${user.id}`);
+           // res.addTrailers('token', `${service.createToken(user)} ${user.id}`);
             
         } else {
             res.status(404).json({ access: 'false' });
