@@ -30,7 +30,7 @@ function singIn(req, res) {
         if(!user) return res.status(404).json({ message: 'No user found' });
         if(user.password === req.body.password) {
             //req.user = user;
-            res.addTrailers('token', `${service.createToken(user)} ${user.id}`);
+            res.addTrailers({'token': `${service.createToken(user)} ${user.id}`});
             res.status(200).json({
                 access: 'true'
                // token: service.createToken(user),
