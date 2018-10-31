@@ -11,22 +11,18 @@ app.set('port', process.env.PORT || 3000);
 //Middleware
 app.use(express.json());/*si estamos recibiendo un json lo convierte y sera accesible en las rutas*/
 
-// Routes
-app.use('/api/v2/', userRoute);
-//app.use('/events', eventRouter);
-app.use('/roles', rolRouter);
-
-// catch unrouted urls
-app.all('*', function(req, res) {
-    throw new Error("Bad request")
-});
-
 // inject an error handling middleware
 app.use((e, req, res, next) => {
     if (e.message === "Bad request") {
         res.status(400).json({error: {msg: e.message, stack: e.stack}});
     }
 });
+
+// Routes
+app.use('/api/v2/', userRoute);
+//app.use('/events', eventRouter);
+app.use('/roles', rolRouter);
+
 
 // Report
 app.listen(app.get('port'), () => {

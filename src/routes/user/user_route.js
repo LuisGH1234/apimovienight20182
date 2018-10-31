@@ -80,4 +80,10 @@ router.post('/snacklists', auth.isAuth, snacklistController.addSnacklistByEvent)
 router.delete('/snacklists/:id', auth.isAuth, snacklistController.deleteSnacklist);
 router.put('/snacklists/:id', auth.isAuth, snacklistController.updateSnacklist);
 
+
+// catch unrouted urls
+router.all('*', function(req, res) {
+    throw new Error("Bad request");
+});
+
 module.exports = router;
