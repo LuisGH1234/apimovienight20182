@@ -24,7 +24,9 @@ router.get('/users', userController.getUsers);
 router.get('/users/:id', auth.isAuth, userController.getUser);
 router.put('/users/:id', auth.isAuth, userController.updateUser);
 
-router.post('/signup/as', usersign.signUp);
+router.post('/signup/as', /*usersign.signUp*/ (req,res) => {
+    res.json({ active: 'true' });
+});
 router.post('/signin', usersign.singIn);
 
 router.get('/users/:user_id/personal_playlists/:p_play_id/personal_media_contents', auth.isAuth, personalMediaContentController.getPersonalMediaContents);
