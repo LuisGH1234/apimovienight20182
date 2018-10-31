@@ -16,6 +16,18 @@ app.use('/api/v2/', userRoute);
 //app.use('/events', eventRouter);
 app.use('/roles', rolRouter);
 
+// catch unrouted urls
+app.all('*', function(req, res) {
+    throw new Error("Bad request")
+});
+
+// inject an error handling middleware
+app.use((e, req, res, next) => {
+    if (e.message === "Bad request") {
+        res.status(400).json({error: {msg: e.message, stack: e.stack}});
+    }
+});
+
 // Report
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get('port')}`);
