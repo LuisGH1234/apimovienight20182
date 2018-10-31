@@ -6,34 +6,50 @@ class User{
         this._user = user;
     }
 
-    static exist(email, callback){
-        let sql = 'SELECT * FROM users WHERE email = ?';
-        mysqlConnection.query(sql, [email], (error, users, fields) => {
-            callback(error, users.length > 0);
+    static exist(email){
+        return Promise((resolve, reject) => {
+            try {
+                let sql = 'SELECT * FROM users WHERE email = ?';
+                mysqlConnection.query(sql, [email], (error, users, fields) => {
+                    if(error){
+                        return reject({ consoleError: error, responseError: 'error' });
+                    } else if (users.length > 0 == true) {
+                        return reject({ consoleError: 'user already in DB', responseError: 'exist' }); //exist = true
+                    }
+                    resolve(); //exist = false
+                });
+            } catch (error) {
+                reject(error);
+            }
         });
     }
 
-    static save(user, callback){
-        let sql = `INSERT INTO users SET ?`;
-        mysqlConnection.query(sql, user, (error, rows, fields) => {
-            callback(error);
+    static save(user){
+        return Promise((resolve, reject) => {
+            try {
+                let sql = `INSERT INTO users SET ?`;
+                mysqlConnection.query(sql, user, (error, rows, fields) => {
+                    if(error){
+                        return reject({ consoleError: 'user did no successfully saved', responseError: 'error' });
+                    }
+                    resolve();
+                });
+            } catch (error) {
+                reject({ error, status: 500 });
+            }
         });
     }
     static find(email, callback) {
-        
-        /*mysqlConnection.query(sql, [email], (error, rows, fields) => {
-            callback(error, rows[0]);
-        });*/
-
         return new Promise((resolve, reject) => {
             try {
                 let sql = `SELECT * FROM users WHERE email = ?`;
                 mysqlConnection.query(sql, [email], (error, rows, fields) => {
-                    if(!error){
-                        resolve(rows[0]);
-                    } else {
-                        reject({ error, status: 401 });
+                    if(error){
+                        return reject({ consoleError: error, responseError: 'error' });
+                    } else if (!rows[0]) {
+                        return reject({ consoleError: 'user couldnt be found', responseError: 'error' });
                     }
+                    resolve(rows[0]);
                 });
             } catch (error) {
                 reject({ error, status: 500 });
