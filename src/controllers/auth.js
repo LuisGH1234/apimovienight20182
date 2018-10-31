@@ -2,29 +2,7 @@ const User = require('../models/user');
 const service = require('../services/jwt-service');
 
 function signUp(request, response) {
-    return response.json({status: 'enter'});
-    /*User.exist(request.body.email, (err, exist) => {
-        if(!err && exist == false) {
-            User.save(request.body, error => {
-                if(!error){
-                    console.log('user successfully saved');
-                } else {
-                    console.log('user did no successfully saved');
-                }
-            });
-            
-            User.find(request.body.email).then( user =>{
-                console.log(user);
-                response.status(201).json({ token: service.createToken(user) });
-            }).catch( error => {
-                console.log(error);
-                response.status(404).json({ status: 'error' });
-            });
-        } else {
-            response.json({ status: 'exist' });
-        }
-    });*/
-
+    // Patron Promises
     User.exist(request.body.email)
     .then(() => { 
         //la unica manera que entre aqui es que no haya error y no exista el usuario en BD

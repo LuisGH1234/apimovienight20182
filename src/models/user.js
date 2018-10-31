@@ -7,7 +7,7 @@ class User{
     }
 
     static exist(email){
-        return Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             try {
                 let sql = 'SELECT * FROM users WHERE email = ?';
                 mysqlConnection.query(sql, [email], (error, users, fields) => {
@@ -25,7 +25,7 @@ class User{
     }
 
     static save(user){
-        return Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             try {
                 let sql = `INSERT INTO users SET ?`;
                 mysqlConnection.query(sql, user, (error, rows, fields) => {
