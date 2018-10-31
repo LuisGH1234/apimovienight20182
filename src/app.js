@@ -12,7 +12,7 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.json());/*si estamos recibiendo un json lo convierte y sera accesible en las rutas*/
 
 // Routes
-app.use('/api/v2', userRoute);
+app.use('/api/v2/', userRoute);
 //app.use('/events', eventRouter);
 app.use('/roles', rolRouter);
 

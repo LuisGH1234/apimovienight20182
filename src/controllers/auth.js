@@ -2,7 +2,7 @@ const User = require('../models/user');
 const service = require('../services/jwt-service');
 
 function signUp(request, response) {
-    return response.json({status: 'enter'});
+    //return response.json({status: 'enter'});
     /*User.exist(request.body.email, (err, exist) => {
         if(!err && exist == false) {
             User.save(request.body, error => {
