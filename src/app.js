@@ -11,6 +11,11 @@ app.set('port', process.env.PORT || 3000);
 //Middleware
 app.use(express.json());/*si estamos recibiendo un json lo convierte y sera accesible en las rutas*/
 
+// catch unrouted urls
+router.all('*', function(req, res) {
+    throw new Error("Bad request");
+});
+
 // inject an error handling middleware
 app.use((e, req, res, next) => {
     if (e.message === "Bad request") {

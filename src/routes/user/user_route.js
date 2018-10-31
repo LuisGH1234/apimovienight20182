@@ -81,9 +81,4 @@ router.delete('/snacklists/:id', auth.isAuth, snacklistController.deleteSnacklis
 router.put('/snacklists/:id', auth.isAuth, snacklistController.updateSnacklist);
 
 
-// catch unrouted urls
-router.all('*', function(req, res) {
-    throw new Error("Bad request");
-});
-
 module.exports = router;
