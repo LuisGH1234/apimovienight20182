@@ -24,7 +24,7 @@ router.get('/users', userController.getUsers);
 router.get('/users/:id', auth.isAuth, userController.getUser);
 router.put('/users/:id', auth.isAuth, userController.updateUser);
 
-router.post('/user/signup', (req,res) => {
+router.post('/user/sign_up', (req,res) => {
     res.json({ active: 'true' });
 });
 router.post('/login', usersign.singIn);
