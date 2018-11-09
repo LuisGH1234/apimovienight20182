@@ -85,6 +85,15 @@ ALTER TABLE events MODIFY date datetime null;
 ALTER TABLE playlists MODIFY description text null;
 ALTER TABLE snacklists MODIFY description text null;
 ALTER TABLE responsabilities MODIFY description text null;
+-- users
+ALTER TABLE users MODIFY user_code bigint(20) null;
+ALTER TABLE users MODIFY phone nvarchar(9) null;
+ALTER TABLE users MODIFY firstname nvarchar(50) not null;
+ALTER TABLE users MODIFY lastname nvarchar(50) null;
+ALTER TABLE users MODIFY email nvarchar(50) not null;
+ALTER TABLE users MODIFY password nvarchar(50) not null;
+ALTER TABLE users MODIFY image_url text null;
+-- end
 ALTER TABLE events ADD created_by bigint(20) not null;
 -- latitud decimal(8,6) -> -99.999999 | 99.999999
 ALTER TABLE events ADD latitude decimal(8,6) null;

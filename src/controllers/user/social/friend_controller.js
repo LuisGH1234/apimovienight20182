@@ -8,7 +8,7 @@ exports.getFriends = (request, response) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                friends: rows
+                list: rows
             };
             response.json(retu);
         }

@@ -7,7 +7,7 @@ exports.getPersonalPlaylist = (request, response) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                personal_playlists: rows
+                list: rows
             };
             response.json(retu);
         }

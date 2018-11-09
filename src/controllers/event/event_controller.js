@@ -9,7 +9,7 @@ exports.getEventsByUser = (request, response) => {
         if(!error) {
             let retu = {};
             retu.status = "ok";
-            retu.events = events;
+            retu.list = events;
             response.json(retu);
         }
         else {

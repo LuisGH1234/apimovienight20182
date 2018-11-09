@@ -7,7 +7,7 @@ exports.listNotification = (request, response) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                notifications: rows
+                list: rows
             };
             response.json(retu);
         }

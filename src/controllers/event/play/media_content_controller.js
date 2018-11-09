@@ -9,7 +9,7 @@ exports.getMediaContentsByPlaylist = (request, response) => {
         if(!error) {
             let retu = {};
             retu.status = "ok";
-            retu.media_contents = rows;
+            retu.list = rows;
             response.json(retu);
         } else {
             console.log(error);

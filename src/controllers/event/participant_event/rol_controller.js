@@ -6,7 +6,7 @@ exports.getRoles = (request, response) => {
         if(!error){
             let retu = {
                 status: "ok",
-                roles: rows
+                list: rows
             };
             response.json(retu);
         } else{

@@ -7,7 +7,7 @@ exports.getPlaylistsByEvent = (request, response) => {
        if(!error){
            let retu = {};
            retu.status = "ok";
-           retu.playlists = rows;
+           retu.list = rows;
            response.json(retu);
        } else{
            console.log(error);

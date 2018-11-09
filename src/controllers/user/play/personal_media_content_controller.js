@@ -10,7 +10,7 @@ exports.getPersonalMediaContents = (request, response) => {
        if(!error){
            let retu = {};
            retu.status = "ok";
-           retu.personal_media_contents = rows;
+           retu.list = rows;
            response.json(retu);
        } else {
            console.log(error);
