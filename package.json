@@ -14,7 +14,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node src/app.js"
+    "start": "expo-cli start",
+    "start12": "node src/app.js"
   },
   "author": "",
   "license": "ISC"
