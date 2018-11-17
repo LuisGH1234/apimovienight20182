@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const myConfig = require('./databaseConfig');
 
-const mysqlConnection2 = mysql.createPool({
+const mysqlConnection = mysql.createPool({
     connectionLimit: 10,
     host: myConfig.host_name(1),
     user: myConfig.user(1),
