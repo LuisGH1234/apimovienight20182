@@ -172,4 +172,7 @@ DELIMITER ;
 
 SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.location 'location', e.date 'date', pe.rol_id, e.latitude, e.longitude, e.image_url, e.description 
                 FROM participant_events pe right join events e on e.id=pe.event_id
-			    WHERE pe.user_id = 71
+			    WHERE pe.user_id = 71;
+
+update events set name='Maraton de Terror', location='mi casa', image_url='https://multimedia.larepublica.pe/660x392/larepublica/imagen/2018/03/20/noticia-netflix-peliculas-de-terror.png',description='MovieNight para ver la mayor cantidad de peliculas de terror con amigos del colegio' where id = 291;
+update users set image_url='https://i.kinja-img.com/gawker-media/image/upload/s--Tg_qqR3r--/c_scale,f_auto,fl_progressive,q_80,w_800/dnmtn4ksijwyep0xmljk.jpg' where id = 71;

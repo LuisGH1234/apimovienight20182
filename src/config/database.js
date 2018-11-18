@@ -1,8 +1,8 @@
 const mysql = require('mysql');
 const myConfig = require('./databaseConfig');
 
-const mysqlConnection = mysql.createPool({
-    connectionLimit: 10,
+const mysqlConnection = mysql.createConnection({
+    /*connectionLimit: 10,*/
     host: myConfig.host_name(1),
     user: myConfig.user(1),
     password: myConfig.password(1),
@@ -10,14 +10,23 @@ const mysqlConnection = mysql.createPool({
     port: myConfig.port
 });
 
-mysqlConnection.getConnection((error, conn) => {
+mysqlConnection.connect(error => {
     if(error){
-        conn.release();
         console.log(`DB: not connected\n${error}`);
         return;
     }
-    conn.release();
     console.log("DB: is connected");
 });
 
+mysqlConnection.end((err) => {
+    if(err) console.log("Error while endind connection:\n${err}")
+});
+
 module.exports = mysqlConnection;
+
+/*
+createPool
+
+getConnection(err, conn) => conn.release
+
+*/
