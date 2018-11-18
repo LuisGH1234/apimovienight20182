@@ -16,9 +16,6 @@ exports.getMediaContentsByPlaylist = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deleteMediaContent = (request, response) => {
@@ -31,9 +28,6 @@ exports.deleteMediaContent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -50,8 +44,5 @@ exports.addMediaContent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

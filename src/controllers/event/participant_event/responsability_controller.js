@@ -17,9 +17,6 @@ exports.getResponsabilitiesByEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.getResponsabilitiesByUser = (request, response) => {
@@ -39,9 +36,6 @@ exports.getResponsabilitiesByUser = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -63,9 +57,6 @@ exports.getResponsabilitiesByUserByEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.addResponsabilityByEvent = (request, response) => {
@@ -83,9 +74,6 @@ exports.addResponsabilityByEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deleteResponsability = (request, response) => {
@@ -98,8 +86,5 @@ exports.deleteResponsability = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

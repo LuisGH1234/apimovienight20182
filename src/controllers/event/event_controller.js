@@ -17,9 +17,6 @@ exports.getEventsByUser = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.addEvent = (request, response) => {
@@ -43,9 +40,6 @@ exports.addEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.addParticipantToEvent = (request, response) => {
@@ -64,9 +58,6 @@ exports.addParticipantToEvent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -94,9 +85,6 @@ exports.updateEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deleteEvent = (request, response) => {
@@ -109,9 +97,6 @@ exports.deleteEvent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 

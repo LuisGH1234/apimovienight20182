@@ -18,9 +18,6 @@ class User{
                     }
                     resolve(); //exist = false
                 });
-                mysqlConnection.end((err) => {
-                    if(err) console.log("Error while endind connection:\n${err}");
-                });
             } catch (error) {
                 reject(error);
             }
@@ -36,9 +33,6 @@ class User{
                         return reject({ consoleError: 'user did no successfully saved', responseError: 'error' });
                     }
                     resolve();
-                });
-                mysqlConnection.end((err) => {
-                    if(err) console.log("Error while endind connection:\n${err}");
                 });
             } catch (error) {
                 reject({ error, status: 500 });
@@ -56,9 +50,6 @@ class User{
                         return reject({ consoleError: 'user couldnt be found', responseError: 'error' });
                     }
                     resolve(rows[0]);
-                });
-                mysqlConnection.end((err) => {
-                    if(err) console.log("Error while endind connection:\n${err}");
                 });
             } catch (error) {
                 reject({ error, status: 500 });

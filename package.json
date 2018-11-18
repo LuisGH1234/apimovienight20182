@@ -14,7 +14,6 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start45": "expo-cli start",
     "start": "node src/index.js"
   },
   "author": "",

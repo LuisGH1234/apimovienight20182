@@ -16,9 +16,6 @@ exports.getPersonalPlaylist = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deletePersonalPlaylist = (request, response) => {
@@ -30,9 +27,6 @@ exports.deletePersonalPlaylist = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -47,9 +41,6 @@ exports.addPersonalPlayList = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.updatePersonalPlaylist = (request, response) => {
@@ -63,9 +54,6 @@ exports.updatePersonalPlaylist = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 

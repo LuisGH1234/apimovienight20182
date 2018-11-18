@@ -14,9 +14,6 @@ exports.getSnacklistByEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.addSnacklistByEvent = (request, response) => {
@@ -33,9 +30,6 @@ exports.addSnacklistByEvent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deleteSnacklist = (request, response) => {
@@ -49,9 +43,6 @@ exports.deleteSnacklist = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.updateSnacklist = (request, response) => {
@@ -64,8 +55,5 @@ exports.updateSnacklist = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

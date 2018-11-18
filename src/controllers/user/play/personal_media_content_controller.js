@@ -17,9 +17,6 @@ exports.getPersonalMediaContents = (request, response) => {
            response.json({status: "error"});
        }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.deletePersonalMediaContent = (request, response) => {
@@ -33,15 +30,11 @@ exports.deletePersonalMediaContent = (request, response) => {
             response.json({status: "error"});
         }
     });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
-    });
 };
 
 exports.addPersonalMediaContent = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
-    //title, year, personal_playlist_id, image_url
     let sql = `INSERT INTO personal_media_contents SET ?`;
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error) response.json({status: "ok"});
@@ -49,8 +42,5 @@ exports.addPersonalMediaContent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
-    });
-    mysqlConnection.end((err) => {
-        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
