@@ -17,6 +17,9 @@ exports.getPersonalMediaContents = (request, response) => {
            response.json({status: "error"});
        }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.deletePersonalMediaContent = (request, response) => {
@@ -29,6 +32,9 @@ exports.deletePersonalMediaContent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -43,5 +49,8 @@ exports.addPersonalMediaContent = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

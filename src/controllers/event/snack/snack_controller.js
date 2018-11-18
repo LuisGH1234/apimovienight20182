@@ -16,6 +16,9 @@ exports.getSnacksBySnacklist = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.deleteSnack = (request, response) => {
@@ -29,13 +32,15 @@ exports.deleteSnack = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.addSnack = (request, response) => {
     if (!request.body) {
         return response.json({message: "invalid JSON"});
     }
-    //snacklist_id, name, trademark
     let sql = 'INSERT INTO snacks SET ?';
     mysqlConnection.query(sql, request.body, (error, rows, fields) => {
         if(!error){
@@ -44,5 +49,8 @@ exports.addSnack = (request, response) => {
             console.log(error);
             response.json({status: "error", message: error});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

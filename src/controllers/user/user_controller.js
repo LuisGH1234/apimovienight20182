@@ -9,6 +9,9 @@ exports.getUsers = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.getUser = (request, response) => {
@@ -21,6 +24,9 @@ exports.getUser = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.getUser2 = (request, response) => {
@@ -32,6 +38,9 @@ exports.getUser2 = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -49,6 +58,9 @@ exports.addUser = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -69,5 +81,8 @@ exports.updateUser = (request, response) => {
             console.log(error);
             return response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

@@ -17,6 +17,9 @@ exports.getFriends = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.deleteFriend = (request, response) => {
@@ -29,13 +32,15 @@ exports.deleteFriend = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.addFriend = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
     let post = request.body;
-    //user_id, friend_id
     post.confirmed = false;
     let sql = `INSERT INTO friendships SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {
@@ -44,6 +49,9 @@ exports.addFriend = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
 
@@ -57,5 +65,8 @@ exports.updateFriendConfirmed = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };

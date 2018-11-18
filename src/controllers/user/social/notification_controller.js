@@ -16,6 +16,9 @@ exports.listNotification = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.deleteNotification = (request, response) => {
@@ -28,13 +31,15 @@ exports.deleteNotification = (request, response) => {
             response.json({status: "error"});
         }
     });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
+    });
 };
 
 exports.addNotification = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
     let post = request.body;
-    //reciever_id, sender_id, description
     post.date = new Date();
     let sql = `INSERT INTO notifications SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {
@@ -43,5 +48,8 @@ exports.addNotification = (request, response) => {
             console.log(error);
             response.json({status: "error"});
         }
+    });
+    mysqlConnection.end((err) => {
+        if(err) console.log("Error while endind connection:\n${err}");
     });
 };
