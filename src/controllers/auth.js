@@ -15,7 +15,7 @@ function signUp(request, response) {
     .then(user => {
         //se encontro el usuario correctamente
         console.log(user);
-        return response.status(201).json({ token: service.createToken(user) });
+        return response.status(201).json({ token: `${service.createToken(user)} ${user.id}` });
     })
     .catch(error => {
         console.log(error.consoleError);

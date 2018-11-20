@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
 
-const userRoute = require('./routes/user/user_route');
+const userRoute = require('./src/routes/user/user_route');
 //const eventRouter = require('./routes/event/event_router');
-const rolRouter = require('./routes/event/rol_router');
+const rolRouter = require('./src/routes/event/rol_router');
 
 // Settings
 app.set('port', process.env.PORT || 3000);
