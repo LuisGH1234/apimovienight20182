@@ -24,7 +24,7 @@ router.get('/users', userController.getUsers);
 router.get('/users/:id', auth.isAuth, userController.getUser);
 router.put('/users/:id', auth.isAuth, userController.updateUser);
 
-router.get('/home/users/:id', userController.getHome);
+router.get('/home/users/:id', auth.isAuth, userController.getHome);
 
 router.post('/signup', usersign.signUp);
 router.post('/signin', usersign.singIn);
