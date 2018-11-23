@@ -35,7 +35,7 @@ exports.addFriend = (request, response) => {
     if (!request.body)
         response.json({message: 'invalid JSON'});
     let post = request.body;
-    post.confirmed = false;
+    post.confirmed = true;
     let sql = `INSERT INTO friendships SET ?`;
     mysqlConnection.query(sql, post, (error, rows, fields) => {
         if(!error) response.json({status: `ok`});
