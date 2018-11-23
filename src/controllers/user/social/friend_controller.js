@@ -3,12 +3,12 @@ const mysqlConnection = require('../../../config/database');
 exports.getFriends = (request, response) => {
     const { user_id } = request.params;
     console.log(`param: ${user_id}`);
-    let sql = `SELECT f.id, f.friend_id, f.confirmed FROM friendships f WHERE user_id = ?`;
+    let sql = `call listarAmigos(?);`;
     mysqlConnection.query(sql, [user_id], (error, rows, fields) => {
         if(!error) {
             let retu = {
                 status: "ok",
-                list: rows
+                list: rows[0]
             };
             response.json(retu);
         }

@@ -177,6 +177,7 @@ SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.loc
 
 update events set name='Maraton de Terror', location='mi casa', image_url='https://multimedia.larepublica.pe/660x392/larepublica/imagen/2018/03/20/noticia-netflix-peliculas-de-terror.png',description='MovieNight para ver la mayor cantidad de peliculas de terror con amigos del colegio' where id = 291;
 update users set image_url='https://i.kinja-img.com/gawker-media/image/upload/s--Tg_qqR3r--/c_scale,f_auto,fl_progressive,q_80,w_800/dnmtn4ksijwyep0xmljk.jpg' where id = 71;
+update events set create_date=NOW() where id=291;
 
 SHOW GRANTS FOR CURRENT_USER();
 
@@ -184,14 +185,14 @@ DROP procedure IF exists listarHome;
 DELIMITER //
 create procedure listarHome (in _id bigint(20))
 begin
-	select ts.name, ts.image_url, ts.description, ts.create_date
+	select ts.event_name, ts.event_image_url, ts.description, cast(ts.create_date as char(50)) 'create_date', ts.user_name, ts.user_image_url
 	from (
-	select max(e.id), e.name, e.image_url, e.description, e.create_date
-	from events e
+	select max(e.id) 'id_event', e.name 'event_name', e.image_url 'event_image_url', e.description, e.create_date, u.firstname 'user_name', u.image_url 'user_image_url'
+	from events e left join participant_events pe on e.id=pe.event_id left join users u on pe.user_id=u.id
 	where created_by=_id
 	union
-    select e.id, e.name, e.image_url, e.description, e.create_date
-	from events e
+    select e.id 'id_event', e.name 'event_name', e.image_url 'event_image_url', e.description, e.create_date, u.firstname 'user_name', u.image_url 'user_image_url'
+	from events e left join participant_events pe on e.id=pe.event_id left join users u on pe.user_id=u.id
 	where e.created_by in (select friend_id from friendships where user_id=_id)
 	order by 5 desc
     ) ts;
@@ -199,3 +200,5 @@ end//
 DELIMITER ;
 
 call listarHome(71);
+
+SELECT f.id, f.friend_id, f.confirmed FROM friendships f WHERE user_id = ?
