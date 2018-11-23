@@ -38,11 +38,11 @@ exports.getUser2 = (request, response) => {
 exports.getHome = (request, response) => {
     const { id } = request.params;
     let sql = `call listarHome(?)`;
-    mysqlConnection.query(sql, [id], (error, results, fields) => {
+    mysqlConnection.query(sql, [id], (error, rows, fields) => {
         if(!error){
             let retu = {
                 status: "ok",
-                list: results
+                list: rows[0]
             };
             return response.json(retu);
         } else {
