@@ -9,13 +9,8 @@ const rolRouter = require('./src/routes/event/rol_router');
 app.set('port', process.env.PORT || 3000);
 
 //Middleware
-app.use(express.json());/*si estamos recibiendo un json lo convierte y sera accesible en las rutas*/
-
-// catch unrouted urls
-/*router.all('*', function(req, res) {
-    throw new Error("Bad request");
-});*/
-
+//si estamos recibiendo un json lo convierte y sera accesible en las rutas
+app.use(express.json());
 // inject an error handling middleware
 app.use((e, req, res, next) => {
     return res.status(500).json({error: {stack: e.stack}});
@@ -23,7 +18,6 @@ app.use((e, req, res, next) => {
 
 // Routes
 app.use('/api/v2/', userRoute);
-//app.use('/events', eventRouter);
 app.use('/roles', rolRouter);
 
 

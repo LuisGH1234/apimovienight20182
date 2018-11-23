@@ -103,6 +103,7 @@ ALTER TABLE events ADD image_url text null;
 ALTER TABLE users ADD image_url text null;
 ALTER TABLE playlists ADD image_url text null;
 ALTER TABLE events ADD description text null;
+ALTER TABLE events ADD create_date date null;
 ALTER TABLE media_contents ADD imdb_id nvarchar(30) null;
 ALTER TABLE personal_media_contents ADD imdb_id nvarchar(30) null;
 
@@ -111,7 +112,7 @@ DROP procedure IF exists insertEvent;
 DELIMITER //
 create procedure insertEvent (in name_ varchar(50), in user_rol int(11), in user_id_ bigint(20), in img text)
 begin
-		insert into events (name, created_by, image_url) values (name_, user_id_, img);
+		insert into events (name, created_by, image_url, create_date) values (name_, user_id_, img, NOW());
         set @last_id := (select max(id) from events where created_by=user_id_);
         insert into participant_events (event_id, user_id, rol_id) values (@last_id, user_id_, user_rol);
 end//
@@ -176,3 +177,25 @@ SELECT pe.id 'participant_event_id', e.id 'event_id', e.name 'name_event', e.loc
 
 update events set name='Maraton de Terror', location='mi casa', image_url='https://multimedia.larepublica.pe/660x392/larepublica/imagen/2018/03/20/noticia-netflix-peliculas-de-terror.png',description='MovieNight para ver la mayor cantidad de peliculas de terror con amigos del colegio' where id = 291;
 update users set image_url='https://i.kinja-img.com/gawker-media/image/upload/s--Tg_qqR3r--/c_scale,f_auto,fl_progressive,q_80,w_800/dnmtn4ksijwyep0xmljk.jpg' where id = 71;
+
+SHOW GRANTS FOR CURRENT_USER();
+
+DROP procedure IF exists listarHome;
+DELIMITER //
+create procedure listarHome (in _id bigint(20))
+begin
+	select ts.name, ts.image_url, ts.description, ts.create_date
+	from (
+	select max(e.id), e.name, e.image_url, e.description, e.create_date
+	from events e
+	where created_by=_id
+	union
+    select e.id, e.name, e.image_url, e.description, e.create_date
+	from events e
+	where e.created_by in (select friend_id from friendships where user_id=_id)
+	order by 5 desc
+    ) ts;
+end//
+DELIMITER ;
+
+call listarHome(71);

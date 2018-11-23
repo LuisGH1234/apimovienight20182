@@ -35,6 +35,22 @@ exports.getUser2 = (request, response) => {
     });
 };
 
+exports.getHome = (request, response) => {
+    const { id } = request.params;
+    let sql = `call listarHome(?)`;
+    mysqlConnection.query(sql, [id], (error, results, fields) => {
+        if(!error){
+            let retu = {
+                status: "ok",
+                list: results
+            };
+            return response.json(retu);
+        } else {
+            return response.json({ status: "error" });
+        }
+    });
+};
+
 exports.addUser = (request, response) => {
     if(!request.body){
         return response.json({status: "invalid JSON"});
