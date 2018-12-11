@@ -18,31 +18,32 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `responsabilities`
+-- Table structure for table `notifications`
 --
 
-DROP TABLE IF EXISTS `responsabilities`;
+DROP TABLE IF EXISTS `notifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `responsabilities` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `product_name` varchar(25) NOT NULL,
-  `description` text,
-  `participant_event_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `responsabilities_participant_events` (`participant_event_id`),
-  CONSTRAINT `responsabilities_participant_events` FOREIGN KEY (`participant_event_id`) REFERENCES `participant_events` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+CREATE TABLE `notifications` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `date` datetime DEFAULT NULL,
+  `reciever_id` bigint(20) NOT NULL,
+  `sender_id` bigint(20) NOT NULL COMMENT 'es aquel usuario quien me envio la notificacion',
+  `description` text NOT NULL,
+  PRIMARY KEY (`id`,`reciever_id`),
+  KEY `Notification_User` (`reciever_id`),
+  CONSTRAINT `Notification_User` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `responsabilities`
+-- Dumping data for table `notifications`
 --
 
-LOCK TABLES `responsabilities` WRITE;
-/*!40000 ALTER TABLE `responsabilities` DISABLE KEYS */;
-INSERT INTO `responsabilities` VALUES (11,'Product 2','Description Product 2',271),(21,'Product 2','Description Product 2',261),(31,'Product Postman','Description for this product',271),(41,'Product Postman','Description for this product',271);
-/*!40000 ALTER TABLE `responsabilities` ENABLE KEYS */;
+LOCK TABLES `notifications` WRITE;
+/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
+INSERT INTO `notifications` VALUES (11,'2018-09-24 00:00:00',1,2,'description 1 2'),(51,'2018-10-24 05:19:24',71,1,'User Luis notify me'),(61,'2018-10-24 05:19:31',71,1,'User Luis notify me. (second time)'),(71,'2018-10-24 05:31:34',71,1,'Some description from Postman'),(81,'2018-10-31 03:45:37',71,1,'Some description from Postman2');
+/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:53:00
+-- Dump completed on 2018-12-11 17:15:30

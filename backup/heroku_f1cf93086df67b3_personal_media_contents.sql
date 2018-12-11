@@ -18,32 +18,33 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `snacklists`
+-- Table structure for table `personal_media_contents`
 --
 
-DROP TABLE IF EXISTS `snacklists`;
+DROP TABLE IF EXISTS `personal_media_contents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `snacklists` (
+CREATE TABLE `personal_media_contents` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_id` bigint(20) NOT NULL,
-  `original` tinyint(1) NOT NULL,
-  `description` text,
-  `name` varchar(50) DEFAULT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `year` varchar(15) NOT NULL,
+  `personal_playlist_id` int(11) NOT NULL,
+  `image_url` text,
+  `imdb_id` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `SnackList_Event` (`event_id`),
-  CONSTRAINT `SnackList_Event` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE
+  KEY `PersonalMediaContent_PersonalPlayList` (`personal_playlist_id`),
+  CONSTRAINT `PersonalMediaContent_PersonalPlayList` FOREIGN KEY (`personal_playlist_id`) REFERENCES `personal_playlists` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `snacklists`
+-- Dumping data for table `personal_media_contents`
 --
 
-LOCK TABLES `snacklists` WRITE;
-/*!40000 ALTER TABLE `snacklists` DISABLE KEYS */;
-INSERT INTO `snacklists` VALUES (1,51,0,'some description postman 2','some name'),(11,51,0,'some description postman 2','some name'),(21,291,0,'Description for Snacklist 1','Snacklist 1'),(31,291,0,'Description for Snacklist 2','Snacklist 2');
-/*!40000 ALTER TABLE `snacklists` ENABLE KEYS */;
+LOCK TABLES `personal_media_contents` WRITE;
+/*!40000 ALTER TABLE `personal_media_contents` DISABLE KEYS */;
+INSERT INTO `personal_media_contents` VALUES (11,'Thor: Ragnarok','2017',1,'https://en.wikipedia.org/wiki/Thor:_Ragnarok#/media/File:Thor_Ragnarok_poster.jpg',NULL),(31,'Guardians of the Galaxy Vol. 2','2017',1,'https://upload.wikimedia.org/wikipedia/en/a/ab/Guardians_of_the_Galaxy_Vol_2_poster.jpg',NULL),(41,'Guardians of the Galaxy Vol. 2','2017',1,'https://upload.wikimedia.org/wikipedia/en/a/ab/Guardians_of_the_Galaxy_Vol_2_poster.jpg',NULL);
+/*!40000 ALTER TABLE `personal_media_contents` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:52:52
+-- Dump completed on 2018-12-11 17:15:39

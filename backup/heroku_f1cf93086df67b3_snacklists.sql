@@ -18,31 +18,32 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `personal_playlists`
+-- Table structure for table `snacklists`
 --
 
-DROP TABLE IF EXISTS `personal_playlists`;
+DROP TABLE IF EXISTS `snacklists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `personal_playlists` (
+CREATE TABLE `snacklists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `description` text NOT NULL,
+  `event_id` bigint(20) NOT NULL,
+  `original` tinyint(1) NOT NULL,
+  `description` text,
+  `name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `PersonalPlayList_User` (`user_id`),
-  CONSTRAINT `PersonalPlayList_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  KEY `SnackList_Event` (`event_id`),
+  CONSTRAINT `SnackList_Event` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `personal_playlists`
+-- Dumping data for table `snacklists`
 --
 
-LOCK TABLES `personal_playlists` WRITE;
-/*!40000 ALTER TABLE `personal_playlists` DISABLE KEYS */;
-INSERT INTO `personal_playlists` VALUES (1,71,'myFirstPlaylist','Description for my first personal Playlist'),(11,71,'mySecondPlaylist','Description for my second personal Playlist'),(31,71,'mySecondPlaylist2','My new description for my third personal playlist by added from postman'),(41,71,'myThirdPlaylist','Description for my third Playlist by postamn');
-/*!40000 ALTER TABLE `personal_playlists` ENABLE KEYS */;
+LOCK TABLES `snacklists` WRITE;
+/*!40000 ALTER TABLE `snacklists` DISABLE KEYS */;
+INSERT INTO `snacklists` VALUES (1,51,0,'some description postman 2','some name'),(11,51,0,'some description postman 2','some name'),(21,291,0,'Description for Snacklist 1','Snacklist 1'),(31,291,0,'Description for Snacklist 2','Snacklist 2');
+/*!40000 ALTER TABLE `snacklists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:52:13
+-- Dump completed on 2018-12-11 17:15:18

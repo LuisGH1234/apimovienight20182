@@ -18,32 +18,31 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `notifications`
+-- Table structure for table `personal_playlists`
 --
 
-DROP TABLE IF EXISTS `notifications`;
+DROP TABLE IF EXISTS `personal_playlists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notifications` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `date` datetime DEFAULT NULL,
-  `reciever_id` bigint(20) NOT NULL,
-  `sender_id` bigint(20) NOT NULL COMMENT 'es aquel usuario quien me envio la notificacion',
+CREATE TABLE `personal_playlists` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `name` varchar(20) NOT NULL,
   `description` text NOT NULL,
-  PRIMARY KEY (`id`,`reciever_id`),
-  KEY `Notification_User` (`reciever_id`),
-  CONSTRAINT `Notification_User` FOREIGN KEY (`reciever_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `PersonalPlayList_User` (`user_id`),
+  CONSTRAINT `PersonalPlayList_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `notifications`
+-- Dumping data for table `personal_playlists`
 --
 
-LOCK TABLES `notifications` WRITE;
-/*!40000 ALTER TABLE `notifications` DISABLE KEYS */;
-INSERT INTO `notifications` VALUES (11,'2018-09-24 00:00:00',1,2,'description 1 2'),(51,'2018-10-24 05:19:24',71,1,'User Luis notify me'),(61,'2018-10-24 05:19:31',71,1,'User Luis notify me. (second time)'),(71,'2018-10-24 05:31:34',71,1,'Some description from Postman'),(81,'2018-10-31 03:45:37',71,1,'Some description from Postman2');
-/*!40000 ALTER TABLE `notifications` ENABLE KEYS */;
+LOCK TABLES `personal_playlists` WRITE;
+/*!40000 ALTER TABLE `personal_playlists` DISABLE KEYS */;
+INSERT INTO `personal_playlists` VALUES (1,71,'myFirstPlaylist','Description for my first personal Playlist'),(11,71,'mySecondPlaylist','Description for my second personal Playlist'),(31,71,'mySecondPlaylist2','My new description for my third personal playlist by added from postman'),(41,71,'myThirdPlaylist','Description for my third Playlist by postamn');
+/*!40000 ALTER TABLE `personal_playlists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:53:23
+-- Dump completed on 2018-12-11 17:15:00

@@ -18,33 +18,31 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `media_contents`
+-- Table structure for table `responsabilities`
 --
 
-DROP TABLE IF EXISTS `media_contents`;
+DROP TABLE IF EXISTS `responsabilities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `media_contents` (
+CREATE TABLE `responsabilities` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `playlist_id` int(11) NOT NULL,
-  `title` varchar(100) DEFAULT NULL,
-  `year` varchar(15) NOT NULL,
-  `image_url` text,
-  `imdb_id` varchar(30) DEFAULT NULL,
+  `product_name` varchar(25) NOT NULL,
+  `description` text,
+  `participant_event_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ModiaContent_PlayList` (`playlist_id`),
-  CONSTRAINT `ModiaContent_PlayList` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+  KEY `responsabilities_participant_events` (`participant_event_id`),
+  CONSTRAINT `responsabilities_participant_events` FOREIGN KEY (`participant_event_id`) REFERENCES `participant_events` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `media_contents`
+-- Dumping data for table `responsabilities`
 --
 
-LOCK TABLES `media_contents` WRITE;
-/*!40000 ALTER TABLE `media_contents` DISABLE KEYS */;
-INSERT INTO `media_contents` VALUES (11,61,'Captain America: Civil War','2016','https://upload.wikimedia.org/wikipedia/en/5/53/Captain_America_Civil_War_poster.jpg',NULL),(21,61,'Doctor Strange','2016','https://upload.wikimedia.org/wikipedia/en/c/c7/Doctor_Strange_poster.jpg',NULL),(31,61,'Captain America: The First Avenger','2011','https://upload.wikimedia.org/wikipedia/en/3/37/Captain_America_The_First_Avenger_poster.jpg',NULL);
-/*!40000 ALTER TABLE `media_contents` ENABLE KEYS */;
+LOCK TABLES `responsabilities` WRITE;
+/*!40000 ALTER TABLE `responsabilities` DISABLE KEYS */;
+INSERT INTO `responsabilities` VALUES (11,'Product 2','Description Product 2',271),(21,'Product 2','Description Product 2',261),(31,'Product Postman','Description for this product',271),(41,'Product Postman','Description for this product',271);
+/*!40000 ALTER TABLE `responsabilities` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:53:37
+-- Dump completed on 2018-12-11 17:15:21

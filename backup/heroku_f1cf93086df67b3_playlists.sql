@@ -18,33 +18,33 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `personal_media_contents`
+-- Table structure for table `playlists`
 --
 
-DROP TABLE IF EXISTS `personal_media_contents`;
+DROP TABLE IF EXISTS `playlists`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `personal_media_contents` (
+CREATE TABLE `playlists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) DEFAULT NULL,
-  `year` varchar(15) NOT NULL,
-  `personal_playlist_id` int(11) NOT NULL,
+  `event_id` bigint(20) NOT NULL,
+  `original` tinyint(1) NOT NULL,
+  `description` text,
+  `name` varchar(20) DEFAULT 'NAMES',
   `image_url` text,
-  `imdb_id` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `PersonalMediaContent_PersonalPlayList` (`personal_playlist_id`),
-  CONSTRAINT `PersonalMediaContent_PersonalPlayList` FOREIGN KEY (`personal_playlist_id`) REFERENCES `personal_playlists` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8;
+  KEY `PlayList_Event` (`event_id`),
+  CONSTRAINT `PlayList_Event` FOREIGN KEY (`event_id`) REFERENCES `events` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `personal_media_contents`
+-- Dumping data for table `playlists`
 --
 
-LOCK TABLES `personal_media_contents` WRITE;
-/*!40000 ALTER TABLE `personal_media_contents` DISABLE KEYS */;
-INSERT INTO `personal_media_contents` VALUES (11,'Thor: Ragnarok','2017',1,'https://en.wikipedia.org/wiki/Thor:_Ragnarok#/media/File:Thor_Ragnarok_poster.jpg',NULL),(31,'Guardians of the Galaxy Vol. 2','2017',1,'https://upload.wikimedia.org/wikipedia/en/a/ab/Guardians_of_the_Galaxy_Vol_2_poster.jpg',NULL),(41,'Guardians of the Galaxy Vol. 2','2017',1,'https://upload.wikimedia.org/wikipedia/en/a/ab/Guardians_of_the_Galaxy_Vol_2_poster.jpg',NULL);
-/*!40000 ALTER TABLE `personal_media_contents` ENABLE KEYS */;
+LOCK TABLES `playlists` WRITE;
+/*!40000 ALTER TABLE `playlists` DISABLE KEYS */;
+INSERT INTO `playlists` VALUES (1,61,0,'description 1','playlist 1',NULL),(11,61,1,'some','play 4',NULL),(21,61,0,'descript','playlist name',NULL),(31,61,0,'descript 6','play 6',NULL),(41,61,0,'Nuevo','Avengers ',NULL),(51,291,0,'Description Playlist 1','Playlist 1',NULL),(61,291,0,'Some description for PUTrequest','Postman PUT Playlist','URL'),(81,291,0,'Description postman test 2','Postman New Playlist','URL'),(91,291,0,'','Playlist 4',NULL),(101,291,0,'Description postman test 2','Postman New Playlist','URL'),(111,291,0,'Description postman test 2','Postman New Playlist','URL');
+/*!40000 ALTER TABLE `playlists` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -56,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:53:47
+-- Dump completed on 2018-12-11 17:15:08

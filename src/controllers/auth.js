@@ -2,6 +2,10 @@ const User = require('../models/user');
 const service = require('../services/jwt-service');
 
 function signUp(request, response) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (!re.test(request.body.email)) {
+        return response.status(400).json({ message: 'Invalid Email' });
+    }
     // Patron Promises
     User.exist(request.body.email)
     .then(() => { 

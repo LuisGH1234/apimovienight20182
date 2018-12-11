@@ -18,31 +18,31 @@ USE `heroku_f1cf93086df67b3`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `snacks`
+-- Table structure for table `friendships`
 --
 
-DROP TABLE IF EXISTS `snacks`;
+DROP TABLE IF EXISTS `friendships`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `snacks` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `snacklist_id` int(11) NOT NULL,
-  `name` varchar(50) DEFAULT NULL,
-  `trademark` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `Snack_SnackList` (`snacklist_id`),
-  CONSTRAINT `Snack_SnackList` FOREIGN KEY (`snacklist_id`) REFERENCES `snacklists` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+CREATE TABLE `friendships` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) NOT NULL,
+  `friend_id` bigint(20) NOT NULL,
+  `confirmed` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`,`user_id`),
+  KEY `Friend_User` (`user_id`),
+  CONSTRAINT `Friend_User` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `snacks`
+-- Dumping data for table `friendships`
 --
 
-LOCK TABLES `snacks` WRITE;
-/*!40000 ALTER TABLE `snacks` DISABLE KEYS */;
-INSERT INTO `snacks` VALUES (1,31,'Product 1','Trademark 1'),(11,31,'Product 2','Trademark 2');
-/*!40000 ALTER TABLE `snacks` ENABLE KEYS */;
+LOCK TABLES `friendships` WRITE;
+/*!40000 ALTER TABLE `friendships` DISABLE KEYS */;
+INSERT INTO `friendships` VALUES (1,71,1,0),(11,71,11,1),(21,71,21,0);
+/*!40000 ALTER TABLE `friendships` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-11-06 23:53:07
+-- Dump completed on 2018-12-11 17:15:33

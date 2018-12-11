@@ -201,4 +201,20 @@ DELIMITER ;
 
 call listarHome(71);
 
-SELECT f.id, f.friend_id, f.confirmed FROM friendships f WHERE user_id = ?
+DROP procedure IF exists listarAmigos;
+DELIMITER //
+create procedure listarAmigos (in _id bigint(20))
+begin
+	select u.id, u.firstname, u.image_url, u.email
+	from users u
+	where id in (select friend_id from friendships where user_id=_id)
+	order by 2;
+end//
+DELIMITER ;
+
+call listarAmigos(71);
+
+select * from users;
+delete from users where id in (301,311,321);
+
+
