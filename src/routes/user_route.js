@@ -16,7 +16,13 @@ const playlistController = require('../controllers/event/play/playlist_controlle
 const snackController = require('../controllers/event/snack/snack_controller');
 const snacklistController = require('../controllers/event/snack/snacklist_controller');
 
-router.use(auth.isAuth);
+//Los middlewares se ejecutan de forma sequencial
+router.use(auth.isAuth); //Primero en ejecutarse
+router.use('/users', (_, res, next) => { //Segundo en ejecutarse
+    //Para colocar un header en la rutas que comiencen con /users
+    res.set('Rol','user');
+    next();
+});
 
 router.post('/signup', usersign.signUp);
 router.post('/signin', usersign.singIn);

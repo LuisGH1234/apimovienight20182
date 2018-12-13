@@ -5,7 +5,7 @@ function isAuth(req, res, next) {
     //new RegExp(`/api/${app.get('API_Version')}/signup|signin`)
     if(/\/api\/v\d\/signin|signup/.test(req.originalUrl)){
         //Con una Expresion Regular validamos que no haya autheticacion por token
-        // cuando se requiera de un Resgistro de usuario o Iniciar Sesion
+        // cuando se requiera de un Registro de usuario o Iniciar Sesion
         return next();
     }
 

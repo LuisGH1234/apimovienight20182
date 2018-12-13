@@ -24,5 +24,7 @@ bin-release/
 #config
 #databaseConfig.js
 *.zip
+*.rar
+
 #modules
 node_modules/
